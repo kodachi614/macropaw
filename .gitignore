@@ -1,4 +1,6 @@
 .git-signoff
-KnGXT-backups
 *.zip
-KnGXT.xml
+/hardware/KnGXT.xml
+/hardware/KnGXT-backups
+/hardware/fp-info-cache
+/firmware/build-*
