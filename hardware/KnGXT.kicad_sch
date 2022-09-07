@@ -6,13 +6,13 @@
 
   (title_block
     (title "KnGXT MacroPaw")
-    (date "2022-05-10")
-    (rev "v1")
-    (company "© 2022 kodachi 6•14, llc")
-    (comment 1 "https://github.com/tjhorner/bizcard")
-    (comment 2 "and TJ Horner's RP2040 business card")
+    (date "2022-08-13")
+    (rev "v0.1.0")
+    (company "© 2022 kodachi 6•14, llc // SPDX-License-Identifier: CERN-OHL-S-2.0")
+    (comment 1 "Open Source Hardware, CERN OHL 2.0: https://ohwr.org/cern_ohl_s_v2.txt")
+    (comment 2 "and TJ Horner's RP2040 business card https://github.com/tjhorner/bizcard")
     (comment 3 "https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf")
-    (comment 4 "Largely based off \"Hardware Design with RP2040\"")
+    (comment 4 "With grateful thanks to \"Hardware Design with RP2040\"")
   )
 
   (lib_symbols
