@@ -14,6 +14,23 @@ The `hardware` directory within each board's directory includes the KiCad 6.0
 design files for the hardware, the fabrication outputs used for the official
 production runs of the hardware, and of course the hardware license
 (in `hardware/LICENSE`).
+## Firmware
+
+The firmware is licensed under the GNU General Public License, version 3.0.
+
+The `firmware` directory within each board's directory includes the firmware
+source code firmware and the firmware license (in `firmware/LICENSE`).
+
+The MacroPaw firmware is based on the [KMK Firmware], and on Adafruit's
+[CircuitPython] and the [NeoPixelBackground] class. The MacroPaw firmware
+uses modified versions of all of these: see BUILDING.md in the firmware
+directory for more. You can also simply flash your MacroPaw with the
+[KnGXT.uf2] file from this repo.
+
+[KMK Firmware]: https://github.com/KMKfw/kmk_firmware/
+[CircuitPython]: https://circuitpython.org/
+[NeoPixelBackground]: https://learn.adafruit.com/intro-to-rp2040-pio-with-circuitpython/advanced-using-pio-to-drive-neopixels-in-the-background
+[KnGXT.uf2]: https://raw.githubusercontent.com/kodachi614/macropaw/main/KnGXT.uf2
 
 ## kicad_libraries
 
