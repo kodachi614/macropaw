@@ -1,6 +1,6 @@
 .git-signoff
-*.zip
 */hardware/KnGXT.xml
 */hardware/KnGXT-backups
 */hardware/fp-info-cache
-*/firmware/build-*
+tools/base-fat.img
+tools/macropaw.img

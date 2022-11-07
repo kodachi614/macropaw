@@ -1,0 +1,34 @@
+set -ex
+
+cd $(dirname $0)
+
+if [ -d /Volumes/MACROPAW ]; then
+    echo "Unmount /Volumes/MACROPAW before continuing" >&2
+    exit 1
+fi
+
+TWO_UP=$( cd ../.. ; pwd )
+
+KMK_DIR="$TWO_UP/kmk_firmware/kmk"
+CIRCUITPYTHON_FIRMWARE="$TWO_UP/circuitpython/ports/raspberrypi/build-kodachi_macropaw_kngxt/firmware.uf2"
+
+if [ ! -d "$KMK_DIR" ]; then
+    echo "$KMK_DIR not found" >&2
+    exit 1
+fi
+
+if [ ! -f "$CIRCUITPYTHON_FIRMWARE" ]; then
+    echo "$CIRCUITPYTHON_FIRMWARE not found" >&2
+    exit 1
+fi
+
+cp base-fat.img macropaw.img
+hdiutil attach macropaw.img
+cp -pr ../KnGXT/firmware/* /Volumes/MACROPAW
+cp -pr "$KMK_DIR" /Volumes/MACROPAW
+hdiutil detach /Volumes/MACROPAW
+
+python3 mkuf2.py \
+    "$CIRCUITPYTHON_FIRMWARE" \
+    0x10100000:macropaw.img \
+    > ../KnGXT/firmware.uf2
