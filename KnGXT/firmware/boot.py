@@ -20,8 +20,8 @@
 
 import supervisor
 
-supervisor.set_next_stack_limit(4096 + 4096)
-supervisor.set_rgb_status_brightness(16)
+supervisor.runtime.next_stack_limit = 16384
+supervisor.runtime.rgb_status_brightness = 16
 
 from adafruit_neopixelbackground import NeoPixelBackground
 
