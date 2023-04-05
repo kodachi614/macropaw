@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14 
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Copyright 2022 Kodachi 6 14
@@ -59,7 +59,7 @@ def check_row0():
 
     if col1.value and col3.value:
         rc = True
-        
+
     row0.value = False
     return rc
 
@@ -69,7 +69,7 @@ def check_row4():
 
     if col1.value and col2.value:
         rc = True
-        
+
     row4.value = False
     return rc
 

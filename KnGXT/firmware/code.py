@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14 
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Copyright 2022 Kodachi 6 14
@@ -57,7 +57,7 @@ def setup_macropaw(keyboard):
 
     print("MATRIX")
     time.sleep(.25)
-    
+
     keyboard.extensions.append(rgb_matrix)
     keyboard.extensions.append(rgb_ring1)
     keyboard.extensions.append(rgb_ring2)
@@ -90,9 +90,9 @@ def setup_macropaw(keyboard):
             key_VolDown,   key_VolUp,          key_Mute,
             key_PrevTrack, key_NextTrack,      key_Play,
 
-            # Main key matrix            
+            # Main key matrix
             KC.RGB_AND,    key_AnimationCycle, KC.RGB_ANI,
-            KC.N7,         KC.N8,              KC.N9, 
+            KC.N7,         KC.N8,              KC.N9,
             KC.N4,         KC.N5,              KC.N6,
             KC.N1,         KC.N2,              KC.N3,
             KC.SPACE,               KC.N0,

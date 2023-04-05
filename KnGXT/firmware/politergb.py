@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14 
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Copyright 2022 Kodachi 6 14

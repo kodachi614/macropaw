@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14 
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Copyright 2022 Kodachi 6 14
@@ -31,10 +31,10 @@ class PixelSlice:
     def fill(self, color):
         # Don't worry about the order mapping here, since we're doing everything.
         self.parent[self.offset:self.offset+self.len] = [color] * self.len
-    
+
     def show(self):
         self.parent.show()
-    
+
     def __setitem__(self, k: int, v):
         if (k < 0) or (k >= self.len):
             raise KeyError(f"{k} is out of range [0, {self.len})")
@@ -49,7 +49,7 @@ class PixelSlice:
 
     def __len__(self):
         return self.len
-    
+
     # def __iter__(self):
     #     yield from self.parent[self.offset:self.len]
 

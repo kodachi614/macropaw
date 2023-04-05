@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14 
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Copyright 2022 Kodachi 6 14
@@ -124,7 +124,7 @@ class MacroPawKeyboard(KMKKeyboard):
             # The leftmost column is where the rotary encoder pushbuttons
             # get mapped, so it doesn't appear here.
             5,  6,  7,
-            9,  10, 11, 
+            9,  10, 11,
             13, 14, 15,
             17, 18, 19,
             21,   22,

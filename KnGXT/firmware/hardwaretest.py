@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14 
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Copyright 2022 Kodachi 6 14
@@ -46,7 +46,7 @@ class HardwareTestRing:
         self.pixels.fill((0, 64, 0))
 
     def _blue(self, key, keyboard, *args):
-        self.pixels.fill((0, 0, 64))    
+        self.pixels.fill((0, 0, 64))
 
 
 class HardwareTestMatrix:
@@ -75,7 +75,7 @@ def setup_hardware_test(keyboard):
         keyboard.leds_ring1.fill(color)
         keyboard.leds_ring2.fill(color)
         keyboard.leds_matrix.fill(color)
-    
+
         time.sleep(1)
 
     keyboard.leds_ring1.fill((0, 0, 0))

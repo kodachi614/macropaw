@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14 
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Copyright 2022 Kodachi 6 14
@@ -43,9 +43,9 @@ class RingElement:
 
 class RingRGB(PoliteRGB):
     def __init__(self, *args, name=None, pixels=None, tail=3, **kwargs):
-        super().__init__(*args, 
-                         pixel_pin=None, pixels=(pixels,), 
-                         user_animation=self._animate, 
+        super().__init__(*args,
+                         pixel_pin=None, pixels=(pixels,),
+                         user_animation=self._animate,
                          animation_mode=AnimationModes.USER,
                          animation_speed=1,
                          **kwargs)
@@ -130,7 +130,7 @@ class RingRGB(PoliteRGB):
                 if self._debug:
                     debug(f"  {element}:")
 
-                p = element.position            
+                p = element.position
 
                 for i in range(3):
                     if (p >= 0) and (p < self.num_pixels):
@@ -145,7 +145,7 @@ class RingRGB(PoliteRGB):
                             debug(f"    pixel {p} {prev} => {updated}")
 
                         frame[p] = updated
-                    
+
                     p -= element.direction
 
                 element.position += element.direction
