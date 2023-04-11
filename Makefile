@@ -1,29 +1,87 @@
-all: KnGXT/firmware.uf2
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Copyright 2022 Kodachi 6 14
+#
+# This file is part of the MacroPaw firmware.
+#
+# The MacroPaw firmware is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or any
+# later version.
+#
+# The MacroPaw firmware is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
+
+# BOARDS is the set of all boards that can be built by the normal build
+# process, defined by the board_rule macro below. If you add a new board, and
+# it can be built like the other BOARDS, you'll need to add it to this list.
+#
+# If the new board needs a custom build process, DO NOT add it to this list.
+# Instead add it to CUSTOM_BOARDS below, and add a custom target for it.
+
+BOARDS=KnGXT
+
+# CUSTOM_BOARDS is the set of all boards that need a custom build
+# process. See above.
+CUSTOM_BOARDS=
+
+all: $(BOARDS) $(CUSTOM_BOARDS)
+
+# The MacroPaw firmware is built atop CircuitPython and KMK. This Makefile
+# expects to find the built CircuitPython firmware in tools/base-firmware.uf2,
+# and the KMK firmware tarfile in tools/kmk-tarfile.tgz. If you're developing,
+# copy your development versions into place; if either is missing, it'll be
+# fetched from www.kodachi.com.
 
 KMK_DIR="../../kmk_firmware/kmk"
-CIRCUITPYTHON_FIRMWARE="$(PWD)/../circuitpython/ports/raspberrypi/build-kodachi_macropaw_kngxt/firmware.uf2"
+CIRCUITPYTHON_BASE_VERSION=8.1.0-ga939eece8
+KMK_VERSION=8913b23d5a72dc7bad84ba28be4cbe9d48031848
 
-# KnGXT/firmware.uf2: \
-# 	tools/base-fat.img \
-# 	$(glob $(KMK_DIR)/*) \
-# 	$(CIRCUITPYTHON_FIRMWARE) \
-# 	$(glob KnGXT/firmware/*.py)
+CIRCUITPYTHON_BASE_URL="https://www.kodachi.com/firmware/circuitpython-kodachi-$(CIRCUITPYTHON_BASE_VERSION).uf2"
+KMK_URL="https://www.kodachi.com/firmware/kmk-$(KMK_VERSION).tgz"
 
-KnGXT/firmware.uf2: \
-	tools/base-fat.img \
-	$(wildcard KnGXT/firmware/*.py)
-	sh tools/build-uf2
+# $(call board_rule,board) generates the basic build target for a given board.
+#
+# We run tools/build-uf2 in Docker here because putting manipulating disk
+# image files is hopelessly nonportable. Using Docker is extremely inelegant,
+# but works on both Linux and MacOS.
 
-tools/base-fat.img:
-	cd tools && \
-	docker run --privileged=true --rm -v $$(pwd):/export ubuntu bash /export/linux-init-fat.sh
+define board_rule
+$1/firmware.uf2: tools/base-firmware.uf2 tools/kmk-tarfile.tgz $(wildcard $1/firmware/*.py)
+	@echo "\n== Building $$@..."
+	bash tools/build-uf2 $1 $$$$(pwd)
+
+$1: $1/firmware.uf2
+
+endef
+
+# We'll use BOARDS to generate basic targets for all of our boards.
+# If you add a new board that can't use this target, you'll need to
+# NOT add it to BOARDS, and instead add a custom target for it.
+
+$(foreach board,$(BOARDS),$(eval $(call board_rule,$(board))))
+
+# We need tools/base-firmware.uf2 and tools/kmk-tarfile.tgz for
+# dependent things. If these are missing, fetch them from the 'Net.
+
+tools/base-firmware.uf2:
+	curl --fail -L $(CIRCUITPYTHON_BASE_URL) -o $@
+
+tools/kmk-tarfile.tgz:
+	curl --fail -L $(KMK_URL) -o $@
 
 clean: FORCE
-	rm -f tools/base-fat.img
-	rm -f tools/macropaw.img
 
 clobber: clean FORCE
-	rm -f KnGXT/firmware.uf2
+	rm -f tools/base-firmware.uf2
+	rm -f tools/kmk-tarfile.tgz
+	rm -f $(addsuffix .uf2, $(addprefix macropaw-, $(BOARDS)))
 
 # Sometimes we have a file-target that we want Make to always try to
 # re-generate (such as compiling a Go program; we would like to let

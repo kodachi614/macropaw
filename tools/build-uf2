@@ -1,34 +1,127 @@
-set -ex
+set -e
+
+# Builds a MacroPaw UF2 image from the CircuitPython base image,
+# a KMK tarfile, and firmware files in a local directory.
 
 cd $(dirname $0)
 
-if [ -d /Volumes/MACROPAW ]; then
-    echo "Unmount /Volumes/MACROPAW before continuing" >&2
+# Usage: build-uf2 board-id base-dir
+
+BOARD_ID="$1"
+BASE_DIR="$2"
+
+TOOLS=${BASE_DIR}/tools
+BASE_FIRMWARE=${TOOLS}/base-firmware.uf2
+KMK_TARFILE=${TOOLS}/kmk-tarfile.tgz
+
+# MACROPAW_IMG is the output file.
+MACROPAW_IMG=${BASE_DIR}/macropaw-${BOARD_ID}.uf2
+
+# WORK_IMAGE is the temporary image we work from.
+WORK_IMAGE=/tmp/macropaw.img
+
+if ! command -v mkfs.vfat >/dev/null 2>&1; then
+    echo "Please install mkfs.vfat, or edit PATH to include it." >&2
     exit 1
 fi
 
-TWO_UP=$( cd ../.. ; pwd )
+if [ $(uname -s) == "Darwin" ]; then
+    echo "==== Setting up for MacOS..."
 
-KMK_DIR="$TWO_UP/kmk_firmware/kmk"
-CIRCUITPYTHON_FIRMWARE="$TWO_UP/circuitpython/ports/raspberrypi/build-kodachi_macropaw_kngxt/firmware.uf2"
+    # Set up for MacOS. !*@&#!*& portability issues...
+    MOUNTPOINT=/Volumes/MACROPAW
 
-if [ ! -d "$KMK_DIR" ]; then
-    echo "$KMK_DIR not found" >&2
-    exit 1
+    # Make sure things are OK.
+    if [ -d $MOUNTPOINT ]; then
+        echo "Please unmount $MOUNTPOINT and run again." >&2
+        exit 1
+    fi
+
+    mount_image () {
+        hdiutil attach "$1" -mountpoint "$2" >/dev/null
+        echo "$2"
+    }
+
+    umount_image () {
+        hdiutil eject "$1" >/dev/null
+    }
+else
+    echo "==== Setting up for Linux..."
+
+    # Set up for Linux. !*@&#!*& portability issues...
+    MOUNTPOINT=/tmp/mnt
+
+    echo "We need to run losetup and mount with sudo; you might need to enter your password."
+
+    if sudo losetup -a | grep -q $WORK_IMAGE | grep -qv deleted; then
+        if mount | grep -q /dev/loop0; then
+            sudo umount /dev/loop0
+        fi
+
+        sudo losetup -d /dev/loop0
+    fi
+
+    if [ ! -d $MOUNTPOINT ]; then
+        mkdir $MOUNTPOINT
+    fi
+
+    mount_image () {
+        loopname=$(sudo losetup -fP "$1" --show)
+        sudo mount "$loopname" "$2"
+        echo "$loopname"
+    }
+
+    umount_image () {
+        sudo umount "$1"
+        sudo losetup -d "$1"
+    }
 fi
 
-if [ ! -f "$CIRCUITPYTHON_FIRMWARE" ]; then
-    echo "$CIRCUITPYTHON_FIRMWARE not found" >&2
-    exit 1
+# OK, once here, we should have MOUNTPOINT set, and mount_image and
+# umount_image should work.
+#
+# Start by shredding and reinitializing $WORK_IMAGE.
+
+echo "==== Mounting work volume..."
+
+rm -f $WORK_IMAGE
+dd if=/dev/zero of=$WORK_IMAGE bs=1M count=8 2>/dev/null
+
+mkfs.fat -n "MACROPAW" -m - $WORK_IMAGE >/dev/null <<EOF
+This is not a bootable disk; it contains firmware for the
+Kodachi 6 14 MacroPaw KnGXT. Please don't try to boot it.
+EOF
+
+mounted=$(mount_image "$WORK_IMAGE" "$MOUNTPOINT")
+
+echo "==== Populating MacroPaw filesystem..."
+
+touch $MOUNTPOINT/.metadata_never_index
+touch $MOUNTPOINT/.Trashes
+
+if [ ! -d $MOUNTPOINT/.fseventsd ]; then
+    mkdir $MOUNTPOINT/.fseventsd
 fi
 
-cp base-fat.img macropaw.img
-hdiutil attach macropaw.img
-cp -pr ../KnGXT/firmware/* /Volumes/MACROPAW
-cp -pr "$KMK_DIR" /Volumes/MACROPAW
-hdiutil detach /Volumes/MACROPAW
+touch $MOUNTPOINT/.fseventsd/no_log
+mkdir $MOUNTPOINT/lib
+mkdir $MOUNTPOINT/lib/kmk
 
-python3 mkuf2.py \
-    "$CIRCUITPYTHON_FIRMWARE" \
-    0x10100000:macropaw.img \
-    > ../KnGXT/firmware.uf2
+( cd $MOUNTPOINT/lib/kmk ; tar xz --no-same-owner --no-same-permissions --file ${KMK_TARFILE} )
+
+cp -pr ${BASE_DIR}/${BOARD_ID}/firmware/* $MOUNTPOINT
+
+echo "==== Unmounting work volume..."
+
+sync
+umount_image "$mounted"
+
+echo "==== Building UF2..."
+
+python3 ${TOOLS}/mkuf2.py \
+    "${BASE_FIRMWARE}" \
+    0x10100000:$WORK_IMAGE \
+    > ${MACROPAW_IMG}
+
+echo "==== Done!"
+
