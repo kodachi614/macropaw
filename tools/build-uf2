@@ -106,6 +106,9 @@ mkdir $MOUNTPOINT/lib/kmk
 # This is the MacroPaw-specific firmware.
 cp -pr ${BASE_DIR}/${BOARD_ID}/firmware/* $MOUNTPOINT
 
+# Finally, arrange for the MacroPaw to enter hardware test on first boot.
+touch $MOUNTPOINT/firstboot
+
 echo "==== Unmounting work volume..."
 
 sync
