@@ -29,7 +29,7 @@ from macropaw import MacroPawKeyboard
 from kmk.keys import KC
 from kmk.extensions.rgb import AnimationModes
 from kmk.extensions.media_keys import MediaKeys
-from kmk.modules.power import Power
+from kmk.modules.usb_disconnect import USBDisconnect
 from kmk.utils import Debug
 
 debug = Debug(__name__)
@@ -99,7 +99,7 @@ def setup_macropaw(keyboard):
         ]
     ]
 
-    keyboard.modules.append(Power())
+    keyboard.modules.append(USBDisconnect())
 
 
 if __name__ == '__main__':
