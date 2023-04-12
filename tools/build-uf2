@@ -1,4 +1,4 @@
-set -e
+set -ex
 
 # Builds a MacroPaw UF2 image from the CircuitPython base image,
 # a KMK tarfile, and firmware files in a local directory.
@@ -14,11 +14,13 @@ TOOLS=${BASE_DIR}/tools
 BASE_FIRMWARE=${TOOLS}/base-firmware.uf2
 KMK_TARFILE=${TOOLS}/kmk-tarfile.tgz
 
+TMP=${TMPDIR:-/tmp}
+
 # MACROPAW_IMG is the output file.
 MACROPAW_IMG=${BASE_DIR}/macropaw-${BOARD_ID}.uf2
 
 # WORK_IMAGE is the temporary image we work from.
-WORK_IMAGE=/tmp/macropaw.img
+WORK_IMAGE=$TMP/macropaw.img
 
 if ! command -v mkfs.vfat >/dev/null 2>&1; then
     echo "Please install mkfs.vfat, or edit PATH to include it." >&2
@@ -39,7 +41,6 @@ if [ $(uname -s) == "Darwin" ]; then
 
     mount_image () {
         hdiutil attach "$1" -mountpoint "$2" >/dev/null
-        echo "$2"
     }
 
     umount_image () {
@@ -49,31 +50,20 @@ else
     echo "==== Setting up for Linux..."
 
     # Set up for Linux. !*@&#!*& portability issues...
-    MOUNTPOINT=/tmp/mnt
+    MOUNTPOINT=$TMP/mnt
 
-    echo "We need to run losetup and mount with sudo; you might need to enter your password."
-
-    if sudo losetup -a | grep -q $WORK_IMAGE | grep -qv deleted; then
-        if mount | grep -q /dev/loop0; then
-            sudo umount /dev/loop0
-        fi
-
-        sudo losetup -d /dev/loop0
-    fi
+    echo "We need to run mount with sudo; you might need to enter your password."
 
     if [ ! -d $MOUNTPOINT ]; then
         mkdir $MOUNTPOINT
     fi
 
     mount_image () {
-        loopname=$(sudo losetup -fP "$1" --show)
-        sudo mount "$loopname" "$2"
-        echo "$loopname"
+        sudo mount -o loop,uid=$UID "$1" "$2"
     }
 
     umount_image () {
         sudo umount "$1"
-        sudo losetup -d "$1"
     }
 fi
 
@@ -92,7 +82,7 @@ This is not a bootable disk; it contains firmware for the
 Kodachi 6 14 MacroPaw KnGXT. Please don't try to boot it.
 EOF
 
-mounted=$(mount_image "$WORK_IMAGE" "$MOUNTPOINT")
+mount_image "$WORK_IMAGE" "$MOUNTPOINT"
 
 echo "==== Populating MacroPaw filesystem..."
 
@@ -107,14 +97,14 @@ touch $MOUNTPOINT/.fseventsd/no_log
 mkdir $MOUNTPOINT/lib
 mkdir $MOUNTPOINT/lib/kmk
 
-( cd $MOUNTPOINT/lib/kmk ; tar xz --no-same-owner --no-same-permissions --file ${KMK_TARFILE} )
+( cd $MOUNTPOINT/lib/kmk ; tar xz --no-same-owner --file ${KMK_TARFILE} )
 
 cp -pr ${BASE_DIR}/${BOARD_ID}/firmware/* $MOUNTPOINT
 
 echo "==== Unmounting work volume..."
 
 sync
-umount_image "$mounted"
+umount_image "$MOUNTPOINT"
 
 echo "==== Building UF2..."
 
