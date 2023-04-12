@@ -43,7 +43,7 @@ Alternately, you can grab prebuilt firmware for the [MacroPaw KnGXT].
 [KMK Firmware]: https://github.com/KMKfw/kmk_firmware/
 [CircuitPython]: https://circuitpython.org/
 [NeoPixelBackground]: https://learn.adafruit.com/intro-to-rp2040-pio-with-circuitpython/advanced-using-pio-to-drive-neopixels-in-the-background
-[MacroPaw KnGXT]: https://www.kodachi.com/firmware/macropaw-KnGXT.uf2
+[MacroPaw KnGXT]: https://www.kodachi.com/firmware/macropaw-KnGXT-7aaeec05e4ba008617a2b04c5031ad3912851d48.uf2
 
 ## 3D Models
 
