@@ -32,15 +32,18 @@ The `firmware` directory within each board's directory includes the firmware
 source code firmware and the firmware license (in `firmware/LICENSE`).
 
 The MacroPaw firmware is based on the [KMK Firmware], and on Adafruit's
-[CircuitPython] and the [NeoPixelBackground] class. The MacroPaw firmware
-uses modified versions of all of these: see BUILDING.md in the firmware
-directory for more. You can also simply flash your MacroPaw with the
-[KnGXT.uf2] file from this repo.
+[CircuitPython] and the [NeoPixelBackground] class. The MacroPaw firmware uses
+modified versions of all of these: to build your own copy, just clone this
+repo and run `make` on a Mac or Linux box (you will need to `brew install
+dosfstools` on your Mac, and then make sure that `/opt/homebrew/sbin` is in
+your `PATH`, for this to work).
+
+Alternately, you can grab prebuilt firmware for the [MacroPaw KnGXT].
 
 [KMK Firmware]: https://github.com/KMKfw/kmk_firmware/
 [CircuitPython]: https://circuitpython.org/
 [NeoPixelBackground]: https://learn.adafruit.com/intro-to-rp2040-pio-with-circuitpython/advanced-using-pio-to-drive-neopixels-in-the-background
-[KnGXT.uf2]: https://raw.githubusercontent.com/kodachi614/macropaw/main/KnGXT.uf2
+[MacroPaw KnGXT]: https://www.kodachi.com/firmware/macropaw-KnGXT.uf2
 
 ## 3D Models
 

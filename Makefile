@@ -53,11 +53,11 @@ KMK_URL="https://www.kodachi.com/firmware/kmk-$(KMK_VERSION).tgz"
 # but works on both Linux and MacOS.
 
 define board_rule
-$1/firmware.uf2: tools/base-firmware.uf2 tools/kmk-tarfile.tgz $(wildcard $1/firmware/*.py)
+macropaw-$1.uf2: tools/base-firmware.uf2 tools/kmk-tarfile.tgz $(wildcard $1/firmware/*.py)
 	@echo "\n== Building $$@..."
 	bash tools/build-uf2 $1 $$$$(pwd)
 
-$1: $1/firmware.uf2
+$1: macropaw-$1.uf2
 
 endef
 
@@ -77,11 +77,11 @@ tools/kmk-tarfile.tgz:
 	curl --fail -L $(KMK_URL) -o $@
 
 clean: FORCE
+	rm -f $(addsuffix .uf2, $(addprefix macropaw-, $(BOARDS)))
 
 clobber: clean FORCE
 	rm -f tools/base-firmware.uf2
 	rm -f tools/kmk-tarfile.tgz
-	rm -f $(addsuffix .uf2, $(addprefix macropaw-, $(BOARDS)))
 
 # Sometimes we have a file-target that we want Make to always try to
 # re-generate (such as compiling a Go program; we would like to let

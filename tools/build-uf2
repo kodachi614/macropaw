@@ -1,4 +1,4 @@
-set -ex
+set -e
 
 # Builds a MacroPaw UF2 image from the CircuitPython base image,
 # a KMK tarfile, and firmware files in a local directory.
@@ -86,6 +86,7 @@ mount_image "$WORK_IMAGE" "$MOUNTPOINT"
 
 echo "==== Populating MacroPaw filesystem..."
 
+# This is a bunch of metadata stuff for MacOS.
 touch $MOUNTPOINT/.metadata_never_index
 touch $MOUNTPOINT/.Trashes
 
@@ -94,11 +95,15 @@ if [ ! -d $MOUNTPOINT/.fseventsd ]; then
 fi
 
 touch $MOUNTPOINT/.fseventsd/no_log
+
+# This is the base KMK firmware. We could freeze this into CircuitPython, but
+# for the moment it's honestly more useful to be able to edit it.
 mkdir $MOUNTPOINT/lib
 mkdir $MOUNTPOINT/lib/kmk
 
 ( cd $MOUNTPOINT/lib/kmk ; tar xz --no-same-owner --file ${KMK_TARFILE} )
 
+# This is the MacroPaw-specific firmware.
 cp -pr ${BASE_DIR}/${BOARD_ID}/firmware/* $MOUNTPOINT
 
 echo "==== Unmounting work volume..."
