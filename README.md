@@ -1,7 +1,16 @@
 This is the MacroPaw keypad project:
 
 KnGXT: First version of the MacroPaw, ID KnGXT. Mostly a proof-of-concept for
-       an RP2040-based USB keyboard with rotary encoders and lights.
+       an RP2040-based USB HID: it has 14 hotswappable MX keyswitches in a 3x5
+       layout like a number pad (including one 2U key, which is why it's 14
+       instead of 15), two rotary encoders with pushbuttons, and a bunch of
+       RGB LEDs.
+
+KnGYT: Mostly a proof-of-concept for double-sided assembly. It has ten
+       hotswappable MX keyswitches in a 5x2 grid, ten RGB LEDs, and no rotary
+       encoders. It's _much_ smaller that its sibling the KnGXT. You'll note
+       it's also missing its firmware; that's because we're waiting for the
+       first build of the hardware to come back!
 
 Both the hardware and the firmware of the MacroPaw are **open source**.
 
