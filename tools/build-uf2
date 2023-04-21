@@ -1,4 +1,4 @@
-set -e
+set -ex
 
 # Builds a MacroPaw UF2 image from the CircuitPython base image,
 # a KMK tarfile, and firmware files in a local directory.
@@ -111,6 +111,10 @@ touch $MOUNTPOINT/firstboot
 
 echo "==== Unmounting work volume..."
 
+sync
+sleep 1
+sync
+sleep 1
 sync
 umount_image "$MOUNTPOINT"
 
