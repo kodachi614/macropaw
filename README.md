@@ -26,7 +26,8 @@ production runs of the hardware, and of course the hardware license
 
 ## Firmware
 
-The firmware is licensed under the GNU General Public License, version 3.0.
+The firmware is licensed under the GNU General Public License, version 3.0 or
+later.
 
 The `firmware` directory within each board's directory includes the firmware
 source code firmware and the firmware license (in `firmware/LICENSE`).
