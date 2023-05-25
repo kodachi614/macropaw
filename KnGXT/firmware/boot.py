@@ -79,10 +79,8 @@ try:
     open("/firstboot", "r")
     enable_hardware_test = True
 
-    try:
-        os.remove("/firstboot")
-    except Exception as e:
-        print(f"could not remove /firstboot: {e}")
+    # Leave /firstboot in place here. Hardware test will remove it after
+    # everything's OK.
 except:
     pass
 

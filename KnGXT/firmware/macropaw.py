@@ -130,3 +130,28 @@ class MacroPawKeyboard(KMKKeyboard):
             21,   22,
         ]
 
+
+
+def Main(name, user_setup):
+    debug = Debug(name)
+
+    hardware_test = False
+
+    try:
+        open("/hardware_test", "r")
+        hardware_test = True
+    except:
+        pass
+
+    keyboard = MacroPawKeyboard()
+
+    if hardware_test:
+        from hardwaretest import setup_hardware_test
+
+        print("Hardware test mode")
+
+        setup_hardware_test(debug, keyboard)
+    else:
+        user_setup(debug, keyboard)
+
+    keyboard.go()

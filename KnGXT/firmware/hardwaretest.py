@@ -18,16 +18,17 @@
 # You should have received a copy of the GNU General Public License along
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
+import errno
+import os
+import storage
 import time
 
 from kmk.keys import KC
-from kmk.utils import Debug
-
-debug = Debug(__name__)
 
 
 class HardwareTestRing:
-    def __init__(self, pixels):
+    def __init__(self, callback, pixels):
+        self.callback = callback
         self.pixels = pixels
 
         self.red = KC.NO.clone()
@@ -39,21 +40,37 @@ class HardwareTestRing:
         self.blue = KC.NO.clone()
         self.blue.after_press_handler(self._blue)
 
+        self._shown = [False, False, False]
+
     def _red(self, key, keyboard, *args):
         self.pixels.fill((64, 0, 0))
+        self.shown(0)
 
     def _green(self, key, keyboard, *args):
         self.pixels.fill((0, 64, 0))
+        self.shown(1)
 
     def _blue(self, key, keyboard, *args):
-        self.pixels.fill((0, 0, 64))
+        if self._shown[2]:
+            self.pixels.fill((0, 0, 0))
+        else:
+            self.pixels.fill((0, 0, 64))
+
+        self.shown(2)
+
+    def shown(self, i):
+        self._shown[i] = True
+
+        self.callback(all(self._shown))
 
 
 class HardwareTestMatrix:
-    def __init__(self, pixels):
+    def __init__(self, callback, pixels):
+        self.callback = callback
         self.pixels = pixels
-        self.colors = [ (0, 0, 0), (64, 0, 0), (0, 64, 0), (0, 0, 64) ]
-        self.indices = [ 0 ] * len(pixels)
+        self.colors = [ (64, 0, 0), (0, 64, 0), (0, 0, 64), (0, 0, 0) ]
+        self.last = len(self.colors) - 1
+        self.indices = [ -1 ] * len(pixels)
 
         self.keys = [ KC.NO.clone() for i in range(len(pixels)) ]
 
@@ -65,31 +82,95 @@ class HardwareTestMatrix:
             )
 
     def _press(self, i):
-        self.indices[i] = (self.indices[i] + 1) % len(self.colors)
+        self.indices[i] = self.indices[i] + 1
+
+        if self.indices[i] > self.last:
+            self.indices[i] = self.last
+
         color = self.colors[self.indices[i]]
         self.pixels[i] = color
 
+        self.callback(all(map(lambda x: x == self.last, self.indices)))
 
-def setup_hardware_test(keyboard):
-    for color in [ (64, 0, 0), (0, 64, 0), (0, 0, 64) ]:
-        keyboard.leds_ring1.fill(color)
-        keyboard.leds_ring2.fill(color)
-        keyboard.leds_matrix.fill(color)
 
-        time.sleep(1)
+class HardwareTestRunner:
+    def __init__(self, keyboard):
+        self.keyboard = keyboard
 
-    keyboard.leds_ring1.fill((0, 0, 0))
-    keyboard.leds_ring2.fill((0, 0, 0))
-    keyboard.leds_matrix.fill((0, 0, 0))
+        self.ring1_status = False
+        self.ring2_status = False
+        self.matrix_status = False
 
-    ring1 = HardwareTestRing(keyboard.leds_ring1)
-    ring2 = HardwareTestRing(keyboard.leds_ring2)
-    matrix = HardwareTestMatrix(keyboard.leds_matrix)
+    def go(self):
+        for color in [ (64, 0, 0), (0, 64, 0), (0, 0, 64) ]:
+            self.keyboard.leds_ring1.fill(color)
+            self.keyboard.leds_ring2.fill(color)
+            self.keyboard.leds_matrix.fill(color)
 
-    layer0 = [
-        # Encoders: CCW, CW, button
-        ring1.red, ring1.green, ring1.blue,
-        ring2.red, ring2.green, ring2.blue,
-    ] + matrix.keys
+            time.sleep(1)
 
-    keyboard.keymap = [ layer0 ]
+        self.keyboard.leds_ring1.fill((16, 16, 16))
+        self.keyboard.leds_ring2.fill((16, 16, 16))
+        self.keyboard.leds_matrix.fill((16, 16, 16))
+
+        ring1 = HardwareTestRing(self.ring1, self.keyboard.leds_ring1)
+        ring2 = HardwareTestRing(self.ring2, self.keyboard.leds_ring2)
+        matrix = HardwareTestMatrix(self.matrix, self.keyboard.leds_matrix)
+
+        layer0 = [
+            # Encoders: CCW, CW, button
+            ring1.red, ring1.green, ring1.blue,
+            ring2.red, ring2.green, ring2.blue,
+        ] + matrix.keys
+
+        self.keyboard.keymap = [ layer0 ]
+
+    def ring1(self, status):
+        self.ring1_status = status
+
+        self.check_status()
+
+    def ring2(self, status):
+        self.ring2_status = status
+
+        self.check_status()
+
+    def matrix(self, status):
+        self.matrix_status = status
+
+        self.check_status()
+
+    def check_status(self):
+        if self.ring1_status and self.ring2_status and self.matrix_status:
+            self.keyboard.leds_ring1.fill((0, 64, 0))
+            self.keyboard.leds_ring2.fill((0, 64, 0))
+            self.keyboard.leds_matrix.fill((0, 64, 0))
+
+            failed = False
+
+            try:
+                storage.remount("/", readonly=False)
+            except Exception as e:
+                print(f"Error removing /firstboot: {e}")
+                failed = True
+
+            if not failed:
+                try:
+                    os.remove("/firstboot")
+                except Exception as e:
+                    print(f"Error removing /firstboot: {e}")
+
+                    if e.errno != errno.ENOENT:
+                        failed = True
+
+                storage.remount("/", readonly=True)
+
+            if failed:
+                self.keyboard.leds_ring1.fill((64, 0, 0))
+                self.keyboard.leds_ring2.fill((64, 0, 0))
+                self.keyboard.leds_matrix.fill((64, 0, 0))
+
+
+def setup_hardware_test(debug, keyboard):
+    runner = HardwareTestRunner(keyboard)
+    runner.go()

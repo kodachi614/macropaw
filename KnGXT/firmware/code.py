@@ -103,27 +103,8 @@ def setup_macropaw(keyboard):
 
 
 if __name__ == '__main__':
-    if usb_cdc.console:
-        debug.enabled = True
-        print("Debugging enabled")
 
-    hardware_test = False
+    from macropaw import Main
 
-    try:
-        open("/hardware_test", "r")
-        hardware_test = True
-    except:
-        pass
 
-    keyboard = MacroPawKeyboard()
-    print("KEYBOARD!")
-
-    if hardware_test:
-        print("Hardware test mode")
-
-        from hardwaretest import setup_hardware_test
-        setup_hardware_test(keyboard)
-    else:
-        setup_macropaw(keyboard)
-
-    keyboard.go()
+    Main(__name__, setup_macropaw)
