@@ -92,7 +92,6 @@ def setup_macropaw(debug, kbd):
     key_Undo = KC.LGUI(KC.Z)
     key_Redo = KC.LSFT(KC.LGUI(KC.Z))
     key_Save = KC.LGUI(KC.S)
-    key_None = KC.NO
 
     key_PlusMinus = KC.HT(KC.PLUS, KC.MINUS)
     key_StarSlash = KC.HT(KC.ASTERISK, KC.SLASH)
@@ -141,7 +140,7 @@ def setup_macropaw(debug, kbd):
             key_Razor,          key_RippleDelete, key_Cut,
             key_PrevFrame,      key_MarkIn,       key_NextFrame,
             key_Undo,           key_MarkOut,      key_Redo,
-            key_None,              KC.LT(1, key_Save),
+            KC.NO,                 KC.LT(1, key_Save),
         ],
 
         # 3: Number pad layer
