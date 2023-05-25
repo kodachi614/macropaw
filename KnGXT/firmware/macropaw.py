@@ -105,12 +105,19 @@ class MacroPawKeyboard(KMKKeyboard):
     will be useful, though.
     """
     def __init__(self):
+        # Pins to use when scanning keys
         self.col_pins = (board.COL0, board.COL1, board.COL2, board.COL3)
         self.row_pins = (board.ROW0, board.ROW1, board.ROW2, board.ROW3, board.ROW4)
         self.diode_orientation = DiodeOrientation.ROW2COL
 
+        # self.allpixels is the underlying LED array of the hardware.
         self.allpixels = NeoPixelBackground(board.NEOPIXEL, 30, pixel_order="GRB", brightness=0.125)
 
+        # The ordering of the LEDs in self.allpixels isn't really all that
+        # useful, so we slice it up in a few different ways. First, the two
+        # LED rings around the rotary encoders -- self.leds_ringX are slices
+        # out of self.allpixels, and self.rgb_ringX are RingRGB objects to
+        # support nicer animations for them.
         self.leds_ring1 = PixelSlice(self.allpixels, 8, 8)
         self.leds_ring2 = PixelSlice(self.allpixels, 0, 8)
         self.leds_matrix = PixelSlice(self.allpixels, 16, 14,
