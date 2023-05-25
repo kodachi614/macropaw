@@ -22,8 +22,22 @@
 
 from kmk.extensions.rgb import AnimationModes
 from kmk.modules.usb_disconnect import USBDisconnect
+from kmk.modules.layers import Layers as _Layers
+from kmk.modules.holdtap import HoldTap
 
 
+# Layers is here to change the LED matrix color depending on what layer
+# is active. This isn't necessarily the best way to do this, mind you.
+class Layers(_Layers):
+    last_top_layer = 0
+    hues = [128, 0, 64, 96]
+    rgb = None
+
+    def after_hid_send(self, kbd):
+        if self.rgb is not None:
+            if kbd.active_layers[0] != self.last_top_layer:
+                self.last_top_layer = kbd.active_layers[0]
+                self.rgb.hue = self.hues[self.last_top_layer]
 
 
 def setup_macropaw(debug, kbd):
@@ -36,22 +50,93 @@ def setup_macropaw(debug, kbd):
     layers = Layers()
     layers.rgb = kbd.rgb_matrix
 
+    kbd.modules.append(HoldTap())
+    kbd.modules.append(layers)
     kbd.modules.append(USBDisconnect())
 
+    # DaVinci Resolve keybindings
+    key_PrevMark = KC.LSFT(KC.UP)
+    key_NextMark = KC.LSFT(KC.DOWN)
+    key_PrevEdit = KC.UP
+    key_NextEdit = KC.DOWN
+    key_PlayReverse = KC.J
+    key_PlayForward = KC.L
+    key_PlayPause = KC.SPACE
+    key_MarkIn = KC.I
+    key_Mark = KC.M
+    key_MarkOut = KC.O
+    key_Razor = KC.LGUI(KC.B)
+    key_RippleDelete = KC.LSFT(KC.LGUI(KC.X))
+    key_Cut = KC.LGUI(KC.X)
+    key_PrevFrame = KC.LEFT
+    key_NextFrame = KC.RIGHT
+    key_Undo = KC.LGUI(KC.Z)
+    key_Redo = KC.LSFT(KC.LGUI(KC.Z))
+    key_Save = KC.LGUI(KC.S)
+    key_None = KC.NO
 
+    key_PlusMinus = KC.HT(KC.PLUS, KC.MINUS)
+    key_StarSlash = KC.HT(KC.ASTERISK, KC.SLASH)
+    key_PeriodEqual = KC.HT(KC.DOT, KC.EQUAL)
+    key_SevenOrParen = KC.HT(KC.N7, KC.LEFT_PAREN)
+    key_NineOrParen = KC.HT(KC.N9, KC.RIGHT_PAREN)
+    key_EightOrBS = KC.HT(KC.N8, KC.BSPC)
 
-    keyboard.keymap = [
+    kbd.keymap = [
+        # 0: Function key layer (default)
         [
             # Encoders: CCW, CW, button
             kbd.KeyVolDown,    kbd.KeyVolUp,     kbd.KeyMute,
             kbd.KeyPrevTrack,  kbd.KeyNextTrack, kbd.KeyPlay,
 
             # Main key matrix
-            KC.RGB_AND,    key_AnimationCycle, KC.RGB_ANI,
-            KC.N7,         KC.N8,              KC.N9,
-            KC.N4,         KC.N5,              KC.N6,
-            KC.N1,         KC.N2,              KC.N3,
-            KC.SPACE,               KC.N0,
+            KC.F1,             KC.F2,            KC.F3,
+            KC.F4,             KC.F5,            KC.F6,
+            KC.F7,             KC.F8,            KC.F9,
+            KC.F10,            KC.F11,           KC.F12,
+            KC.F13,                KC.LT(1, KC.F14),
+        ],
+
+        # 1: Layer-switching layer
+        [
+            # Encoders: CCW, CW, button
+            KC.NO,             KC.NO,            KC.NO,
+            KC.NO,             KC.NO,            KC.NO,
+
+            # Main key matrix
+            KC.NO,             KC.NO,            KC.NO,
+            KC.NO,             KC.NO,            KC.NO,
+            KC.NO,             KC.NO,            KC.NO,
+            KC.TO(2),          KC.TO(3),         KC.NO,
+            KC.TO(0),              KC.NO,
+        ],
+
+        # 2: Da Vinci Resolve layer
+        [
+            # Encoders: CCW, CW, button
+            key_PrevMark,      key_NextMark,     key_Mark,
+            key_PlayReverse,   key_PlayForward,  key_PlayPause,
+
+            # Main key matrix
+            key_PrevEdit,      key_Mark,         key_NextEdit,
+            key_Razor,         key_RippleDelete, key_Cut,
+            key_PrevFrame,     key_MarkIn,       key_NextFrame,
+            key_Undo,          key_MarkOut,      key_Redo,
+            key_None,              KC.LT(1, key_Save),
+        ],
+
+        # 3: Number pad layer
+        [
+            # Encoders: CCW, CW, button
+            kbd.KeyVolDown,    kbd.KeyVolUp,     kbd.KeyMute,
+            kbd.KeyPrevTrack,  kbd.KeyNextTrack, kbd.KeyPlay,
+
+            # Main key matrix
+            key_SevenOrParen,  key_EightOrBS,    key_NineOrParen,
+            KC.N4,             KC.N5,            KC.N6,
+            KC.N1,             KC.N2,            KC.N3,
+            key_PeriodEqual,   KC.N0,            key_StarSlash,
+            key_PlusMinus,         KC.LT(1, KC.ENTER),
         ]
     ]
 
