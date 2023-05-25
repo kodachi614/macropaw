@@ -8,11 +8,10 @@ KnGXT: First version of the MacroPaw, ID KnGXT. Mostly a proof-of-concept for
 
 KnGYT: Mostly a proof-of-concept for double-sided assembly. It has ten
        hotswappable MX keyswitches in a 5x2 grid, ten RGB LEDs, and no rotary
-       encoders. It's _much_ smaller that its sibling the KnGXT. You'll note
-       it's also missing its firmware; that's because we're waiting for the
-       first build of the hardware to come back!
+       encoders. It's _much_ smaller than its sibling the KnGXT, because most
+       of the electronics are on the back of the board.
 
-Both the hardware and the firmware of the MacroPaw are **open source**.
+Both the hardware and the firmware of the MacroPaws are **open source**.
 
 ## Hardware
 
@@ -33,18 +32,31 @@ The `firmware` directory within each board's directory includes the firmware
 source code firmware and the firmware license (in `firmware/LICENSE`).
 
 The MacroPaw firmware is based on the [KMK Firmware], and on Adafruit's
-[CircuitPython] and the [NeoPixelBackground] class. The MacroPaw firmware uses
-modified versions of all of these: to build your own copy, just clone this
-repo and run `make` on a Mac or Linux box (you will need to `brew install
-dosfstools` on your Mac, and then make sure that `/opt/homebrew/sbin` is in
-your `PATH`, for this to work).
+[CircuitPython] and the [NeoPixelBackground] class.
 
-Alternately, you can grab prebuilt firmware for the [MacroPaw KnGXT].
+- You can find the CircuitPython fork with the MacroPaw board definitions at
+  [http://github.com/kodachi614/circuitpython] in the `main` branch. In
+  addition to the board definitions, this branch allows setting whether rotary
+  encoders need a pullup or a pulldown (at least for the RP2040); this change
+  is necessary for the KnGXT because its encoders are mounted the way
+  CircuitPython doesn't expect.
+
+- You can find the KMK fork the MacroPaws use at
+ [http://github.com/kodachi614/kmk_firmware] in the `main` branch. See the
+ README for changes here; there are several.
+
+To build your own copy of the firmware, just clone this repo and run `make` on
+a Mac or Linux box (you will need to `brew install dosfstools` on your Mac,
+and then make sure that `/opt/homebrew/sbin` is in your `PATH`, for this to
+work).
+
+Alternately, you can grab prebuilt firmware for the [MacroPaw KnGXT] and the [MacroPaw KnGYT].
 
 [KMK Firmware]: https://github.com/KMKfw/kmk_firmware/
 [CircuitPython]: https://circuitpython.org/
 [NeoPixelBackground]: https://learn.adafruit.com/intro-to-rp2040-pio-with-circuitpython/advanced-using-pio-to-drive-neopixels-in-the-background
-[MacroPaw KnGXT]: https://www.kodachi.com/firmware/macropaw-KnGXT-7aaeec05e4ba008617a2b04c5031ad3912851d48.uf2
+[MacroPaw KnGXT]: https://www.kodachi.com/firmware/macropaw-KnGXT.uf2
+[MacroPaw KnGXC]: https://www.kodachi.com/firmware/macropaw-KnGYT.uf2
 
 ## 3D Models
 

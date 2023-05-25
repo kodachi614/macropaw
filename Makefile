@@ -40,25 +40,28 @@ all: $(BOARDS) $(CUSTOM_BOARDS)
 # fetched from www.kodachi.com.
 
 KMK_DIR="../../kmk_firmware/kmk"
-CIRCUITPYTHON_BASE_VERSION=8.1.0-ga939eece8
+CIRCUITPYTHON_BASE_VERSION=8.1.0-gaf5ee803
 KMK_VERSION=8913b23d5a72dc7bad84ba28be4cbe9d48031848
 
-CIRCUITPYTHON_BASE_URL="https://www.kodachi.com/firmware/circuitpython-kodachi-$(CIRCUITPYTHON_BASE_VERSION).uf2"
+CIRCUITPYTHON_BASE_URL="https://www.kodachi.com/firmware/circuitpython-kodachi-$(CIRCUITPYTHON_BASE_VERSION)"
 KMK_URL="https://www.kodachi.com/firmware/kmk-$(KMK_VERSION).tgz"
 
-# $(call board_rule,board) generates the basic build target for a given board.
+# $(call board_rule,board) generates the basic build targets for a given board,
+# namely the targets for its base .uf2 file and its macropaw .uf2 file. The
+# bare board name is an alias for the macropaw .uf2 file.
 #
-# We run tools/build-uf2 in Docker here because putting manipulating disk
-# image files is hopelessly nonportable. Using Docker is extremely inelegant,
-# but works on both Linux and MacOS.
+# We need to have per-board base firmware files because a CircuitPython build
+# is specific to a given board.
 
 define board_rule
-macropaw-$1.uf2: tools/base-firmware.uf2 tools/kmk-tarfile.tgz $(wildcard $1/firmware/*.py)
+macropaw-$1.uf2: tools/base-firmware-$1.uf2 tools/kmk-tarfile.tgz $(wildcard $1/firmware/*.py)
 	@echo "\n== Building $$@..."
 	bash tools/build-uf2 $1 $$$$(pwd)
 
 $1: macropaw-$1.uf2
 
+tools/base-firmware-$1.uf2:
+	curl --fail -L $(CIRCUITPYTHON_BASE_URL)-$1.uf2 -o $@
 endef
 
 # We'll use BOARDS to generate basic targets for all of our boards.
@@ -70,8 +73,8 @@ $(foreach board,$(BOARDS),$(eval $(call board_rule,$(board))))
 # We need tools/base-firmware.uf2 and tools/kmk-tarfile.tgz for
 # dependent things. If these are missing, fetch them from the 'Net.
 
-tools/base-firmware.uf2:
-	curl --fail -L $(CIRCUITPYTHON_BASE_URL) -o $@
+tools/base-firmware-$1.uf2:
+	curl --fail -L $(CIRCUITPYTHON_BASE_URL)- -o $@
 
 tools/kmk-tarfile.tgz:
 	curl --fail -L $(KMK_URL) -o $@
@@ -80,7 +83,7 @@ clean: FORCE
 	rm -f $(addsuffix .uf2, $(addprefix macropaw-, $(BOARDS)))
 
 clobber: clean FORCE
-	rm -f tools/base-firmware.uf2
+	rm -f $(addsuffix .uf2, $(addprefix tools/base-firmware-, $(BOARDS)))
 	rm -f tools/kmk-tarfile.tgz
 
 # Sometimes we have a file-target that we want Make to always try to
