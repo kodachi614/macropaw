@@ -23,10 +23,16 @@ import board
 from adafruit_neopixelbackground import NeoPixelBackground
 from pixelslice import PixelSlice
 
+from politergb import PoliteRGB
+from ringrgb import RingRGB
+
+from kmk.keys import KC
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.scanners import DiodeOrientation
 from kmk.scanners.encoder import RotaryioEncoder
 from kmk.scanners.keypad import MatrixScanner
+from kmk.extensions.media_keys import MediaKeys
+from kmk.utils import Debug
 
 class MacroPawKeyboard(KMKKeyboard):
     """
@@ -86,6 +92,8 @@ class MacroPawKeyboard(KMKKeyboard):
                                                 3, 8, 13,
                                                 4, 9 ])
 
+        self.extensions.append(MediaKeys())
+
         # create and register the scanners
         self.matrix = [
             RotaryioEncoder(
@@ -130,6 +138,42 @@ class MacroPawKeyboard(KMKKeyboard):
             21,   22,
         ]
 
+    def setup_animation(self, ring_color, **kwargs):
+        self.rgb_ring1 = RingRGB(name="RING1", pixels=self.leds_ring1)
+        self.rgb_ring1.set_rgb_fill(ring_color)
+
+        self.rgb_ring2 = RingRGB(name="RING2", pixels=self.leds_ring2)
+        self.rgb_ring2.set_rgb_fill(ring_color)
+
+        self.rgb_matrix = PoliteRGB(pixel_pin=None, pixels=(self.leds_matrix,), **kwargs)
+        self.rgb_matrix.set_rgb_fill(ring_color)
+
+        time.sleep(0.25)
+
+        self.extensions.append(self.rgb_matrix)
+        self.extensions.append(self.rgb_ring1)
+        self.extensions.append(self.rgb_ring2)
+
+        self.KeyAnimationCycle = KC.NO.clone()
+        self.KeyAnimationCycle.after_press_handler(self.rgb_matrix.next_animation)
+
+        self.KeyVolDown = KC.VOLD.clone()
+        self.KeyVolDown.after_press_handler(self.rgb_ring1.inject_ccw)
+
+        self.KeyVolUp = KC.VOLU.clone()
+        self.KeyVolUp.after_press_handler(self.rgb_ring1.inject_cw)
+
+        self.KeyMute = KC.MUTE.clone()
+        self.KeyMute.after_press_handler(self.rgb_ring1.inject_fan)
+
+        self.KeyPrevTrack = KC.MRWD.clone()
+        self.KeyPrevTrack.after_press_handler(self.rgb_ring2.inject_ccw)
+
+        self.KeyNextTrack = KC.MFFD.clone()
+        self.KeyNextTrack.after_press_handler(self.rgb_ring2.inject_cw)
+
+        self.KeyPlay = KC.MPLY.clone()
+        self.KeyPlay.after_press_handler(self.rgb_ring2.inject_fan)
 
 
 def Main(name, user_setup):
