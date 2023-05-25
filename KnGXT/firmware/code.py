@@ -25,6 +25,15 @@ from kmk.modules.usb_disconnect import USBDisconnect
 from kmk.modules.layers import Layers as _Layers
 from kmk.modules.holdtap import HoldTap
 
+#### USE THIS TO PICK YOUR KEYMAP ####
+# An annoying thing about keyboards is that you have to match up with
+# the keymap being used on the OS side. We look at the "/keymap" file
+# to choose a Keymapper ("QWERTY" or "Dvorak") from keymapper.py. If
+# the file isn't present or has an invalid map, we default to QWERTY.
+#
+# You can define your own in keymapper.py if you want to.
+
+from keymapper import FSKeymapper as KC
 
 # Layers is here to change the LED matrix color depending on what layer
 # is active. This isn't necessarily the best way to do this, mind you.
