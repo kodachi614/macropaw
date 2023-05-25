@@ -113,7 +113,9 @@ except Exception as e:
 if not enable_mass_storage:
     # Disable mass storage and USB serial.
     storage.disable_usb_drive()
-    usb_cdc.disable()
+
+    if not enable_hardware_test:
+        usb_cdc.disable()
 
 while check_row0() or check_row4():
     time.sleep(0.01)
