@@ -19,6 +19,9 @@
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
 import board
+import usb_cdc
+import time
+import supervisor
 
 from adafruit_neopixelbackground import NeoPixelBackground
 from pixelslice import PixelSlice
@@ -33,6 +36,30 @@ from kmk.scanners.encoder import RotaryioEncoder
 from kmk.scanners.keypad import MatrixScanner
 from kmk.extensions.media_keys import MediaKeys
 from kmk.utils import Debug
+
+
+# Debugging assistance: log when something happens. This is a barebones
+# trace facility, basically.
+
+times = [ ( supervisor.ticks_ms(), "macropaw.py start" ) ]
+
+def log_time(name, ms=None):
+    if ms is None:
+        ms = supervisor.ticks_ms()
+
+    times.append( ( ms, name ) )
+
+def dump_times():
+    prev_time = None
+
+    for ms, name in sorted(times):
+        if prev_time is None:
+            prev_time = ms
+
+        delta_s = (ms - prev_time) / 1000
+
+        print("%8.3fs %s" % (delta_s, name))
+
 
 class MacroPawKeyboard(KMKKeyboard):
     """
@@ -177,7 +204,15 @@ class MacroPawKeyboard(KMKKeyboard):
 
 
 def Main(name, user_setup):
+    log_time("Main start")
+
     debug = Debug(name)
+
+    log_time("Debug")
+
+    # if usb_cdc.console:
+    #     debug.enabled = True
+    #     print("Debugging enabled")
 
     hardware_test = False
 
@@ -187,15 +222,27 @@ def Main(name, user_setup):
     except:
         pass
 
+    log_time("Check /hardware_test")
+
     keyboard = MacroPawKeyboard()
+
+    log_time("MacroPawKeyboard")
 
     if hardware_test:
         from hardwaretest import setup_hardware_test
 
+        log_time("import hardwaretest")
+
         print("Hardware test mode")
 
         setup_hardware_test(debug, keyboard)
+
+        log_time("setup_hardware_test")
     else:
         user_setup(debug, keyboard)
+        log_time("user_setup")
+
+    log_time("Main end")
+    dump_times()
 
     keyboard.go()

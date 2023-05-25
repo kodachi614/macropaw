@@ -18,12 +18,19 @@
 # You should have received a copy of the GNU General Public License along
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
+import supervisor
 
+boot_time = supervisor.ticks_ms()
 
 from kmk.extensions.rgb import AnimationModes
 from kmk.modules.usb_disconnect import USBDisconnect
 from kmk.modules.layers import Layers as _Layers
 from kmk.modules.holdtap import HoldTap
+
+from macropaw import log_time
+
+log_time(f"code.py start", boot_time)
+log_time(f"code.py imports done")
 
 #### USE THIS TO PICK YOUR KEYMAP ####
 # An annoying thing about keyboards is that you have to match up with
@@ -34,6 +41,8 @@ from kmk.modules.holdtap import HoldTap
 # You can define your own in keymapper.py if you want to.
 
 from keymapper import FSKeymapper as KC
+
+log_time(f"import FSKeymapper (got {KC.__class__.__name__})")
 
 # Layers is here to change the LED matrix color depending on what layer
 # is active. This isn't necessarily the best way to do this, mind you.
@@ -151,8 +160,10 @@ def setup_macropaw(debug, kbd):
 
 
 if __name__ == '__main__':
+    log_time("main start")
 
     from macropaw import Main
 
+    log_time("import Main")
 
     Main(__name__, setup_macropaw)
