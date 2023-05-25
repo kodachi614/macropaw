@@ -18,19 +18,21 @@
 # You should have received a copy of the GNU General Public License along
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
+import errno
+import os
+import storage
 import time
 
 from kmk.keys import KC
-from kmk.utils import Debug
-
-debug = Debug(__name__)
 
 
 class HardwareTestMatrix:
-    def __init__(self, pixels):
+    def __init__(self, callback, pixels):
+        self.callback = callback
         self.pixels = pixels
-        self.colors = [ (32, 32, 32), (64, 0, 0), (0, 64, 0), (0, 0, 64), (0, 0, 0) ]
-        self.indices = [ 0 ] * len(pixels)
+        self.colors = [ (64, 0, 0), (0, 64, 0), (0, 0, 64), (0, 0, 0) ]
+        self.last = len(self.colors) - 1
+        self.indices = [ -1 ] * len(pixels)
 
         self.keys = [ KC.NO.clone() for i in range(len(pixels)) ]
 
@@ -41,15 +43,67 @@ class HardwareTestMatrix:
                 lambda key, keyboard, *args, idx=i: self._press(idx)
             )
 
-            self.pixels[i] = self.colors[0]
-
     def _press(self, i):
-        self.indices[i] = (self.indices[i] + 1) % len(self.colors)
+        self.indices[i] = self.indices[i] + 1
+
+        if self.indices[i] > self.last:
+            self.indices[i] = self.last
+
         color = self.colors[self.indices[i]]
         self.pixels[i] = color
 
+        self.callback(all(map(lambda x: x == self.last, self.indices)))
 
-def setup_hardware_test(keyboard):
-    matrix = HardwareTestMatrix(keyboard.leds_matrix)
 
-    keyboard.keymap = [ matrix.keys ]
+class HardwareTestRunner:
+    def __init__(self, keyboard):
+        self.keyboard = keyboard
+        self.matrix_status = False
+
+    def go(self):
+        for color in [ (64, 0, 0), (0, 64, 0), (0, 0, 64) ]:
+            self.keyboard.leds_matrix.fill(color)
+
+            time.sleep(1)
+
+        self.keyboard.leds_matrix.fill((16, 16, 16))
+
+        self.keyboard.keymap = [
+            HardwareTestMatrix(self.matrix, self.keyboard.leds_matrix).keys
+        ]
+
+    def matrix(self, status):
+        self.matrix_status = status
+
+        self.check_status()
+
+    def check_status(self):
+        if self.matrix_status:
+            self.keyboard.leds_matrix.fill((0, 64, 0))
+
+            failed = False
+
+            try:
+                storage.remount("/", readonly=False)
+            except Exception as e:
+                print(f"Error removing /firstboot: {e}")
+                failed = True
+
+            if not failed:
+                try:
+                    os.remove("/firstboot")
+                except Exception as e:
+                    print(f"Error removing /firstboot: {e}")
+
+                    if e.errno != errno.ENOENT:
+                        failed = True
+
+                storage.remount("/", readonly=True)
+
+            if failed:
+                self.keyboard.leds_matrix.fill((64, 0, 0))
+
+
+def setup_hardware_test(debug, keyboard):
+    runner = HardwareTestRunner(keyboard)
+    runner.go()

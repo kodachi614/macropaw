@@ -76,10 +76,8 @@ try:
     open("/firstboot", "r")
     enable_hardware_test = True
 
-    try:
-        os.remove("/firstboot")
-    except Exception as e:
-        print(f"could not remove /firstboot: {e}")
+    # Leave /firstboot in place here. Hardware test will remove it after
+    # everything's OK.
 except:
     pass
 
@@ -115,7 +113,9 @@ except Exception as e:
 if not enable_mass_storage:
     # Disable mass storage and USB serial.
     storage.disable_usb_drive()
-    usb_cdc.disable()
+
+    if not enable_hardware_test:
+        usb_cdc.disable()
 
 while check_row0() or check_row1():
     time.sleep(0.01)
