@@ -102,7 +102,7 @@ def setup_macropaw(debug, kbd):
     key_EightOrBS = KC.HT(KC.N8, KC.BSPC)
 
     kbd.keymap = [
-        # 0: Function key layer (default)
+        # 0: Main layer (default)
         [
             # Encoders: CCW, CW, button
             kbd.KeyVolDown,     kbd.KeyVolUp,     kbd.KeyMute,
@@ -112,11 +112,11 @@ def setup_macropaw(debug, kbd):
             KC.F1,              KC.F2,            KC.F3,
             KC.F4,              KC.F5,            KC.F6,
             KC.F7,              KC.F8,            KC.F9,
-            KC.F10,             KC.F11,           KC.F12,
+            KC.F10,             KC.SPACE,         KC.ENTER,
             KC.F13,                KC.LT(1, KC.F14),
         ],
 
-        # 1: Layer-switching layer
+        # 1: Meta layer
         [
             # Encoders: CCW, CW, button
             KC.NO,              KC.NO,            KC.NO,
@@ -130,7 +130,7 @@ def setup_macropaw(debug, kbd):
             KC.TO(0),              KC.NO,
         ],
 
-        # 2: Da Vinci Resolve layer
+        # 2: DaVinci Resolve layer
         [
             # Encoders: CCW, CW, button
             key_PrevMark,       key_NextMark,     key_Mark,
