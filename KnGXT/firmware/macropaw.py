@@ -28,6 +28,7 @@ from pixelslice import PixelSlice
 
 from politergb import PoliteRGB
 from ringrgb import RingRGB
+from keymapper import Keymapper
 
 from kmk.keys import KC
 from kmk.kmk_keyboard import KMKKeyboard
@@ -164,6 +165,44 @@ class MacroPawKeyboard(KMKKeyboard):
             17, 18, 19,
             21,   22,
         ]
+
+    def switch_to_Dvorak(self, key, keyboard, *args):
+        self.switch_to("Dvorak")
+
+    def switch_to_QWERTY(self, key, keyboard, *args):
+        self.switch_to("QWERTY")
+
+    def switch_to(self, keymap):
+        status, msg = Keymapper.switch_to(keymap)
+
+        flashcolor = (0, 64, 0)
+
+        if status:
+            # The switch went OK.
+            if msg != "OK":
+                # Something weird still happened, though.
+                flashcolor = (0, 0, 64)
+                print(f"Map switch to {keymap} OK, but: {msg}")
+        else:
+            # Didn't work.
+            flashcolor = (64, 0, 0)
+            print(f"Map switch to {keymap} failed: {msg}")
+
+        self.rgb_matrix.set_rgb_fill((0, 0, 0))
+        time.sleep(0.25)
+        self.rgb_matrix.set_rgb_fill(flashcolor)
+        time.sleep(0.25)
+
+        if status:
+            supervisor.reload()
+
+    def setup_mapswitchers(self):
+        # Keys to switch to a different keymap
+        self.SwitchToDvorak = KC.NO.clone()
+        self.SwitchToDvorak.after_press_handler(self.switch_to_Dvorak)
+
+        self.SwitchToQWERTY = KC.NO.clone()
+        self.SwitchToQWERTY.after_press_handler(self.switch_to_QWERTY)
 
     def setup_animation(self, ring_color, **kwargs):
         self.rgb_ring1 = RingRGB(name="RING1", pixels=self.leds_ring1)

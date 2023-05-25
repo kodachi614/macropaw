@@ -1,3 +1,5 @@
+import storage
+
 from kmk.keys import KC
 
 
@@ -33,6 +35,35 @@ class Keymapper:
 
     def __getattr__(self, key):
         return self.mapped(key)
+
+    @classmethod
+    def switch_to(self, mappername):
+        """
+        Switch to a given Keymapper, assuming it exists!
+        """
+
+        if globals().get(mappername, None) is not None:
+            try:
+                storage.remount("/", readonly=False)
+            except Exception as e:
+                return (False, f"Error remounting / for writing: {e}")
+
+            try:
+                with open("/keymap", "w") as f:
+                    f.write(mappername)
+            except Exception as e:
+                return (False, f"Error writing /keymap: {e}")
+
+            try:
+                storage.remount("/", readonly=True)
+            except Exception as e:
+                # We still return True here, because our caller should be
+                # resetting the board.
+                return (True, f"Error remounting / for reading: {e}")
+
+            return(True, "OK")
+
+        return (False, f"Keymapper {mappername} not found")
 
 
 class _QWERTY(Keymapper):

@@ -64,6 +64,7 @@ def setup_macropaw(debug, kbd):
                         animation_mode=AnimationModes.BREATHING,
                         hue_default=128,
                         animation_speed=2)
+    kbd.setup_mapswitchers()
 
     layers = Layers()
     layers.rgb = kbd.rgb_matrix
@@ -104,56 +105,56 @@ def setup_macropaw(debug, kbd):
         # 0: Function key layer (default)
         [
             # Encoders: CCW, CW, button
-            kbd.KeyVolDown,    kbd.KeyVolUp,     kbd.KeyMute,
-            kbd.KeyPrevTrack,  kbd.KeyNextTrack, kbd.KeyPlay,
+            kbd.KeyVolDown,     kbd.KeyVolUp,     kbd.KeyMute,
+            kbd.KeyPrevTrack,   kbd.KeyNextTrack, kbd.KeyPlay,
 
             # Main key matrix
-            KC.F1,             KC.F2,            KC.F3,
-            KC.F4,             KC.F5,            KC.F6,
-            KC.F7,             KC.F8,            KC.F9,
-            KC.F10,            KC.F11,           KC.F12,
+            KC.F1,              KC.F2,            KC.F3,
+            KC.F4,              KC.F5,            KC.F6,
+            KC.F7,              KC.F8,            KC.F9,
+            KC.F10,             KC.F11,           KC.F12,
             KC.F13,                KC.LT(1, KC.F14),
         ],
 
         # 1: Layer-switching layer
         [
             # Encoders: CCW, CW, button
-            KC.NO,             KC.NO,            KC.NO,
-            KC.NO,             KC.NO,            KC.NO,
+            KC.NO,              KC.NO,            KC.NO,
+            KC.NO,              KC.NO,            KC.NO,
 
             # Main key matrix
-            KC.NO,             KC.NO,            KC.NO,
-            KC.NO,             KC.NO,            KC.NO,
-            KC.NO,             KC.NO,            KC.NO,
-            KC.TO(2),          KC.TO(3),         KC.NO,
+            kbd.SwitchToQWERTY, KC.NO,            kbd.SwitchToDvorak,
+            KC.NO,              KC.NO,            KC.NO,
+            KC.NO,              KC.NO,            KC.NO,
+            KC.TO(2),           KC.TO(3),         KC.NO,
             KC.TO(0),              KC.NO,
         ],
 
         # 2: Da Vinci Resolve layer
         [
             # Encoders: CCW, CW, button
-            key_PrevMark,      key_NextMark,     key_Mark,
-            key_PlayReverse,   key_PlayForward,  key_PlayPause,
+            key_PrevMark,       key_NextMark,     key_Mark,
+            key_PlayReverse,    key_PlayForward,  key_PlayPause,
 
             # Main key matrix
-            key_PrevEdit,      key_Mark,         key_NextEdit,
-            key_Razor,         key_RippleDelete, key_Cut,
-            key_PrevFrame,     key_MarkIn,       key_NextFrame,
-            key_Undo,          key_MarkOut,      key_Redo,
+            key_PrevEdit,       key_Mark,         key_NextEdit,
+            key_Razor,          key_RippleDelete, key_Cut,
+            key_PrevFrame,      key_MarkIn,       key_NextFrame,
+            key_Undo,           key_MarkOut,      key_Redo,
             key_None,              KC.LT(1, key_Save),
         ],
 
         # 3: Number pad layer
         [
             # Encoders: CCW, CW, button
-            kbd.KeyVolDown,    kbd.KeyVolUp,     kbd.KeyMute,
-            kbd.KeyPrevTrack,  kbd.KeyNextTrack, kbd.KeyPlay,
+            kbd.KeyVolDown,     kbd.KeyVolUp,     kbd.KeyMute,
+            kbd.KeyPrevTrack,   kbd.KeyNextTrack, kbd.KeyPlay,
 
             # Main key matrix
-            key_SevenOrParen,  key_EightOrBS,    key_NineOrParen,
-            KC.N4,             KC.N5,            KC.N6,
-            KC.N1,             KC.N2,            KC.N3,
-            key_PeriodEqual,   KC.N0,            key_StarSlash,
+            key_SevenOrParen,   key_EightOrBS,    key_NineOrParen,
+            KC.N4,              KC.N5,            KC.N6,
+            KC.N1,              KC.N2,            KC.N3,
+            key_PeriodEqual,    KC.N0,            key_StarSlash,
             key_PlusMinus,         KC.LT(1, KC.ENTER),
         ]
     ]
