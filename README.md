@@ -1,27 +1,23 @@
-This is the MacroPaw keypad project:
+The MacroPaw keypads are a line of small yet fully-customizable mechanical
+keyboards. (The name was originally from my son, years ago when he was young,
+and the "paw" motif has kinda stuck.) Every MacroPaw has MX-style switches
+with RGB LEDs under the keys, USB-C connectivity, and absurd customizability.
 
-KnGXT: First version of the MacroPaw, ID KnGXT. Mostly a proof-of-concept for
-       an RP2040-based USB HID: it has 14 hotswappable MX keyswitches in a 3x5
-       layout like a number pad (including one 2U key, which is why it's 14
-       instead of 15), two rotary encoders with pushbuttons, and a bunch of
-       RGB LEDs.
+| ![](photos/KnGXT.png) | ![](photos/KnGXT-board-top.png) |
+| :-: | :-: |
+| _Assembled KnGXT_     | _KnGXT PCB_ |
+
+KnGXT: Mostly a proof-of-concept for an RP2040-based USB HID: it has 14
+       hotswappable MX keyswitches in a 3x5 layout like a number pad
+       (including one 2U key, which is why it's 14 instead of 15), two rotary
+       encoders with pushbuttons, and a bunch of RGB LEDs.
 
 KnGYT: Mostly a proof-of-concept for double-sided assembly. It has ten
        hotswappable MX keyswitches in a 5x2 grid, ten RGB LEDs, and no rotary
        encoders. It's _much_ smaller than its sibling the KnGXT, because most
        of the electronics are on the back of the board.
 
-Both the hardware and the firmware of the MacroPaws are **open source**.
-
-## Hardware
-
-The hardware is licensed under the CERN Open Hardware License, version 2.0
-or higher, Strongly Reciprocal.
-
-The `hardware` directory within each board's directory includes the KiCad 7
-design files for the hardware, the fabrication outputs used for the official
-production runs of the hardware, and of course the hardware license
-(in `hardware/LICENSE`).
+Both the firmware and the hardware of the MacroPaws are **open source**.
 
 ## Firmware
 
@@ -42,7 +38,7 @@ The MacroPaw firmware is based on the [KMK Firmware], and on Adafruit's
   CircuitPython doesn't expect.
 
 - You can find the KMK fork the MacroPaws use at
- [http://github.com/kodachi614/kmk_firmware] in the `main` branch. See the
+ [http://github.com/kodachi614/kmk_firmware] in the `main` branch. See its
  README for changes here; there are several.
 
 To build your own copy of the firmware, just clone this repo and run `make` on
@@ -57,6 +53,18 @@ Alternately, you can grab prebuilt firmware for the [MacroPaw KnGXT] and the [Ma
 [NeoPixelBackground]: https://learn.adafruit.com/intro-to-rp2040-pio-with-circuitpython/advanced-using-pio-to-drive-neopixels-in-the-background
 [MacroPaw KnGXT]: https://www.kodachi.com/firmware/macropaw-KnGXT.uf2
 [MacroPaw KnGXC]: https://www.kodachi.com/firmware/macropaw-KnGYT.uf2
+
+## Hardware
+
+The hardware is licensed under the CERN Open Hardware License, version 2.0
+or higher, Strongly Reciprocal.
+
+The `hardware` directory within each board's directory includes the [KiCad] 7
+design files for the hardware, the fabrication outputs used for the official
+production runs of the hardware, and of course the hardware license (in
+`hardware/LICENSE`).
+
+[KiCad]: https://www.kicad.org/
 
 ## 3D Models
 
