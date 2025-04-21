@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Kodachi")(type "KiCad")(uri "${KIPRJMOD}/../../..//kicadlib/Symbols/Kodachi.kicad_sym")(options "")(descr ""))
+  (lib (name "MCU_RaspberryPi_and_Boards")(type "Legacy")(uri "${KIPRJMOD}/../../..//kicadlib/Symbols/MCU_RaspberryPi_and_Boards.lib")(options "")(descr ""))
+)

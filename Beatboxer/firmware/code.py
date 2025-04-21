@@ -1,0 +1,130 @@
+# SPDX-FileCopyrightText: 2022 Kodachi 6 14
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Copyright 2022 Kodachi 6 14
+#
+# This file is part of the MacroPaw firmware.
+#
+# The MacroPaw firmware is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or any
+# later version.
+#
+# The MacroPaw firmware is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
+
+import supervisor
+
+boot_time = supervisor.ticks_ms()
+
+from kmk.extensions.rgb import AnimationModes
+from kmk.modules.usb_disconnect import USBDisconnect
+from kmk.modules.layers import Layers as _Layers
+from kmk.modules.holdtap import HoldTap
+
+from macropaw import log_time
+
+log_time(f"code.py start", boot_time)
+log_time(f"code.py imports done")
+
+#### USE THIS TO PICK YOUR KEYMAP ####
+# An annoying thing about keyboards is that you have to match up with
+# the keymap being used on the OS side. We look at the "/keymap" file
+# to choose a Keymapper ("QWERTY" or "Dvorak") from keymapper.py. If
+# the file isn't present or has an invalid map, we default to QWERTY.
+#
+# You can define your own in keymapper.py if you want to.
+
+from keymapper import FSKeymapper as KC
+
+log_time(f"import FSKeymapper (got {KC.__class__.__name__})")
+
+# Layers is here to change the LED matrix color depending on what layer
+# is active. This isn't necessarily the best way to do this, mind you.
+class Layers(_Layers):
+    last_top_layer = 0
+    hues = [128, 64, 0, 96]
+    rgb = None
+
+    def after_hid_send(self, kbd):
+        if self.rgb is not None:
+            if kbd.active_layers[0] != self.last_top_layer:
+                self.last_top_layer = kbd.active_layers[0]
+                self.rgb.hue = self.hues[self.last_top_layer]
+
+
+def setup_macropaw(debug, kbd):
+    ring_color = (0, 0, 64) if debug.enabled else (0, 64, 0)
+    kbd.setup_animation(ring_color=ring_color,
+                        animation_mode=AnimationModes.BREATHING,
+                        hue_default=128,
+                        animation_speed=2)
+    kbd.setup_mapswitchers()
+
+    layers = Layers()
+    layers.rgb = kbd.rgb_matrix
+
+    kbd.modules.append(HoldTap())
+    kbd.modules.append(layers)
+    kbd.modules.append(USBDisconnect())
+
+    # DaVinci Resolve keybindings
+    key_PrevMark = KC.LSFT(KC.UP)
+    key_NextMark = KC.LSFT(KC.DOWN)
+    key_PrevEdit = KC.UP
+    key_NextEdit = KC.DOWN
+    key_PlayReverse = KC.J
+    key_PlayForward = KC.L
+    key_PlayPause = KC.SPACE
+    key_MarkIn = KC.I
+    key_Mark = KC.M
+    key_MarkOut = KC.O
+    key_Razor = KC.LGUI(KC.B)
+    key_RippleDelete = KC.LSFT(KC.LGUI(KC.X))
+    key_Cut = KC.LGUI(KC.X)
+    key_PrevFrame = KC.LEFT
+    key_NextFrame = KC.RIGHT
+    key_Undo = KC.LGUI(KC.Z)
+    key_Redo = KC.LSFT(KC.LGUI(KC.Z))
+    key_Save = KC.LGUI(KC.S)
+
+    key_PrvFrmEd = KC.HT(key_PrevFrame, key_PrevEdit)
+    key_NxtFrmEd = KC.HT(key_NextFrame, key_NextEdit)
+    key_RzrRipple = KC.HT(key_Razor, key_RippleDelete)
+    key_RevUndo = KC.HT(key_PlayReverse, key_Undo)
+    key_FwdRedo = KC.HT(key_PlayForward, key_Redo)
+
+    kbd.keymap = [
+        # 0: Main layer (default)
+        [
+            KC.F1,         KC.F2,        KC.F3,         KC.F4,              KC.F5,
+            KC.F10,        KC.SPACE,     KC.ENTER,      KC.F13,             KC.LT(1, KC.F14),
+        ],
+
+        # 1: Meta layer
+        [
+            KC.VOLU,       KC.TO(0),     KC.TO(2),      kbd.SwitchToQWERTY, kbd.SwitchToDvorak,
+            KC.VOLD,       KC.MRWD,      KC.MPLY,       KC.MFFD,            KC.NO,
+        ],
+
+        # 2: DaVinci Resolve layer
+        [
+            key_PrvFrmEd,  key_PrevMark, key_Mark,      key_NextMark,       key_NxtFrmEd,
+            key_RzrRipple, key_RevUndo,  key_PlayPause, key_FwdRedo,        KC.LT(1, key_Save),
+        ],
+    ]
+
+
+if __name__ == '__main__':
+    log_time("main start")
+
+    from macropaw import Main
+
+    log_time("import Main")
+
+    Main(__name__, setup_macropaw)
