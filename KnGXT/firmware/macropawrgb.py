@@ -23,7 +23,7 @@ from kmk.utils import Debug
 
 debug = Debug(__name__)
 
-class PoliteRGB(RGB):
+class MacroPawRGB(RGB):
     AnimationCycle = [
         AnimationModes.SWIRL, AnimationModes.BREATHING, AnimationModes.RAINBOW,
         AnimationModes.BREATHING_RAINBOW, AnimationModes.KNIGHT
@@ -31,7 +31,15 @@ class PoliteRGB(RGB):
     animation_index = 0
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        new_kwargs = dict(**kwargs)
+
+        self.coord_mapping = None
+
+        if 'coord_mapping' in new_kwargs:
+            self.coord_mapping = new_kwargs['coord_mapping']
+            del new_kwargs['coord_mapping']
+
+        super().__init__(*args, **new_kwargs)
 
         try:
             self.animation_index = self.AnimationCycle.index(self.animation_mode)

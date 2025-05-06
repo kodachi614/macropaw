@@ -26,7 +26,7 @@ import supervisor
 from adafruit_neopixelbackground import NeoPixelBackground
 from pixelslice import PixelSlice
 
-from politergb import PoliteRGB
+from macropawrgb import MacroPawRGB
 from ringrgb import RingRGB
 from keymapper import Keymapper
 
@@ -218,7 +218,11 @@ class MacroPawKeyboard(KMKKeyboard):
         self.rgb_ring2 = RingRGB(name="RING2", pixels=self.leds_ring2)
         self.rgb_ring2.set_rgb_fill(ring_color)
 
-        self.rgb_matrix = PoliteRGB(pixel_pin=None, pixels=(self.leds_matrix,), **kwargs)
+        # Explicitly hand in the coordinate mapping of the main matrix.
+        self.rgb_matrix = MacroPawRGB(pixel_pin=None, pixels=(self.leds_matrix,),
+                                      coord_mapping=[ 5,  6,  7,  9, 10, 11,
+                                                     13, 14, 15, 17, 18, 19, 21, 22 ],
+                                      **kwargs)
         self.rgb_matrix.set_rgb_fill(ring_color)
 
         time.sleep(0.25)

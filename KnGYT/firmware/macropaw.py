@@ -26,7 +26,7 @@ import supervisor
 from adafruit_neopixelbackground import NeoPixelBackground
 from pixelslice import PixelSlice
 
-from politergb import PoliteRGB
+from macropawrgb import MacroPawRGB
 from ringrgb import RingRGB
 from keymapper import Keymapper
 
@@ -162,7 +162,7 @@ class MacroPawKeyboard(KMKKeyboard):
         self.SwitchToQWERTY.after_press_handler(self.switch_to_QWERTY)
 
     def setup_animation(self, ring_color, **kwargs):
-        self.rgb_matrix = PoliteRGB(pixel_pin=None, pixels=(self.leds_matrix,), **kwargs)
+        self.rgb_matrix = MacroPawRGB(pixel_pin=None, pixels=(self.leds_matrix,), **kwargs)
         self.rgb_matrix.set_rgb_fill(ring_color)
 
         time.sleep(0.25)

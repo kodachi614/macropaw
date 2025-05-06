@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License along
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
-from politergb import PoliteRGB
+from macropawrgb import MacroPawRGB
 
 from kmk.extensions.rgb import AnimationModes
 from kmk.utils import Debug
@@ -41,7 +41,7 @@ class RingElement:
         return "<El %X> @%d moving %d" % (id(self), self.position, self.direction)
 
 
-class RingRGB(PoliteRGB):
+class RingRGB(MacroPawRGB):
     def __init__(self, *args, name=None, pixels=None, tail=3, **kwargs):
         super().__init__(*args,
                          pixel_pin=None, pixels=(pixels,),
