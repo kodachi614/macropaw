@@ -27,7 +27,6 @@ from adafruit_neopixelbackground import NeoPixelBackground
 from pixelslice import PixelSlice
 
 from macropawrgb import MacroPawRGB
-from ringrgb import RingRGB
 from keymapper import Keymapper
 
 from kmk.keys import KC
