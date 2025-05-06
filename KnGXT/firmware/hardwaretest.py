@@ -19,6 +19,7 @@
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
 import errno
+import microcontroller
 import os
 import storage
 import time
@@ -151,19 +152,24 @@ class HardwareTestRunner:
             try:
                 storage.remount("/", readonly=False)
             except Exception as e:
-                print(f"Error removing /firstboot: {e}")
+                print(f"Error remounting /: {e}")
                 failed = True
 
             if not failed:
                 try:
                     os.remove("/firstboot")
+                    print(f"Removed /firstboot")
                 except Exception as e:
-                    print(f"Error removing /firstboot: {e}")
-
                     if e.errno != errno.ENOENT:
+                        print(f"Error removing /firstboot: {e} ")
                         failed = True
+                    else:
+                        print("/firstboot already removed?")
 
                 storage.remount("/", readonly=True)
+
+                print("Rebooting...")
+                microcontroller.reset()
 
             if failed:
                 self.keyboard.leds_ring1.fill((64, 0, 0))
