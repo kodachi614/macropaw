@@ -516,16 +516,28 @@
 		(uuid "42a863e8-399c-4195-9822-f9c0cd944854")
 	)
 	(junction
+		(at 130.81 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "48ea6062-6003-4017-927c-d2e61bec1d74")
+	)
+	(junction
+		(at 41.91 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4e42e1b5-f348-4016-a2c6-486bc948b53c")
+	)
+	(junction
+		(at 107.95 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5443027d-68c1-4ef7-8a49-3c27aad31659")
+	)
+	(junction
 		(at 308.61 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "54a68aa0-56c1-448a-b925-20d14bcbe845")
-	)
-	(junction
-		(at 152.4 30.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5681da8d-eb5f-4041-9fd1-1b9350acde49")
 	)
 	(junction
 		(at 346.71 45.72)
@@ -540,6 +552,12 @@
 		(uuid "5e98cd93-687b-49ca-a9d3-6e475027f094")
 	)
 	(junction
+		(at 63.5 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "61c4f6cb-a27c-4089-a147-bb16d1dca3ce")
+	)
+	(junction
 		(at 58.42 25.4)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -550,6 +568,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6336dea7-0f9d-486b-87c6-70ade7acc026")
+	)
+	(junction
+		(at 130.81 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "675b380d-a252-46f3-a05b-b0f096ff2962")
 	)
 	(junction
 		(at 168.91 45.72)
@@ -568,6 +592,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "69db2d36-74b4-4b42-b7f9-f44166db8c07")
+	)
+	(junction
+		(at 63.5 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6b5244e7-2b01-4ebc-b93c-dd4ca1039202")
 	)
 	(junction
 		(at 168.91 25.4)
@@ -624,6 +654,12 @@
 		(uuid "728832f7-d833-47ff-9363-eb95fe75c572")
 	)
 	(junction
+		(at 41.91 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "74bc5230-6b42-4fb1-a677-909377b7d60b")
+	)
+	(junction
 		(at 217.17 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -640,12 +676,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7ad99a62-b2f0-43cf-85f9-5a81291276c9")
-	)
-	(junction
-		(at 130.81 50.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7b09f30b-6214-4e04-b777-03249dd83f33")
 	)
 	(junction
 		(at 346.71 66.04)
@@ -670,6 +700,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "80ea1e36-b84d-4ab6-be31-4bbd5d3e3233")
+	)
+	(junction
+		(at 86.36 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8cb7fd8b-7c27-405c-8d93-1d7caeb9cd74")
 	)
 	(junction
 		(at 171.45 50.8)
@@ -702,12 +738,6 @@
 		(uuid "9443e9da-f828-4172-81e3-94dabc1b943c")
 	)
 	(junction
-		(at 130.81 30.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9449bd24-9204-49c7-bde4-3ec043e14594")
-	)
-	(junction
 		(at 80.01 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -724,12 +754,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "96d8ab95-2b20-4f85-801f-9d395573b91d")
-	)
-	(junction
-		(at 41.91 50.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "975d1880-1684-4843-9524-2ec23a082b8a")
 	)
 	(junction
 		(at 285.75 71.12)
@@ -762,12 +786,6 @@
 		(uuid "afa1a613-d155-4b1e-ab10-69a7c02e8230")
 	)
 	(junction
-		(at 63.5 50.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b0b0e199-67fa-4783-a5f2-3d1cc55bb66d")
-	)
-	(junction
 		(at 80.01 25.4)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -792,6 +810,12 @@
 		(uuid "b550cdbd-933d-44c4-bd21-f7d76a8fa0b9")
 	)
 	(junction
+		(at 152.4 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b9ee0368-a0a3-4596-b367-0cace9e46ce6")
+	)
+	(junction
 		(at 168.91 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -802,6 +826,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bde44ab8-efc7-465b-86ac-1a241640845a")
+	)
+	(junction
+		(at 86.36 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "be0ab619-e4d7-44c8-84ba-a0205bf7da1c")
 	)
 	(junction
 		(at 280.67 66.04)
@@ -822,10 +852,10 @@
 		(uuid "c16cc9d6-1f16-452d-b13c-7a5c13c61b8b")
 	)
 	(junction
-		(at 107.95 50.8)
+		(at 152.4 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c375a82c-3de4-4f97-80e4-466a7039f3ae")
+		(uuid "c24e6cc3-1381-4691-a77f-01c524f52f45")
 	)
 	(junction
 		(at 152.4 71.12)
@@ -858,22 +888,10 @@
 		(uuid "d03ee788-82b6-4976-a127-009993e22434")
 	)
 	(junction
-		(at 86.36 30.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d12a4390-d905-429c-88c5-7d34cd00c38a")
-	)
-	(junction
 		(at 325.12 66.04)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d50f1a30-29a8-4530-8d2b-9464d0755aa0")
-	)
-	(junction
-		(at 41.91 30.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d512953a-6f50-40a4-a164-480ab82bfde6")
 	)
 	(junction
 		(at 35.56 45.72)
@@ -886,12 +904,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dbf6c8c1-42d1-4117-9fe9-4154e3a21d08")
-	)
-	(junction
-		(at 107.95 30.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e0cb2d49-79ce-4f91-8a07-8961a91b2a83")
 	)
 	(junction
 		(at 264.16 30.48)
@@ -918,12 +930,6 @@
 		(uuid "e8926267-e06f-4aa8-b7d5-3cff00d32d9c")
 	)
 	(junction
-		(at 86.36 50.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ecb5cb98-f15d-4620-8f0d-e179d41df1af")
-	)
-	(junction
 		(at 124.46 25.4)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -934,12 +940,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ee5a0f49-edf3-4850-a4dc-78248d6e6605")
-	)
-	(junction
-		(at 152.4 50.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ef195f58-e0eb-43a1-a1ae-66d69bc7826c")
 	)
 	(junction
 		(at 241.3 50.8)
@@ -966,10 +966,10 @@
 		(uuid "f9be17fd-c9d2-4c9c-827e-ba575b4541f3")
 	)
 	(junction
-		(at 63.5 30.48)
+		(at 107.95 30.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "ffff96ce-5029-47c9-b482-2dceac7541be")
+		(uuid "fdfb17c8-6d32-4601-bb4b-a40c803240d3")
 	)
 	(wire
 		(pts
@@ -990,26 +990,6 @@
 			(type default)
 		)
 		(uuid "031df7d3-171c-4c46-86b6-e9d9a3e83e76")
-	)
-	(wire
-		(pts
-			(xy 41.91 30.48) (xy 63.5 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "04c3e97a-803e-4b5f-9970-7e4e831f0209")
-	)
-	(wire
-		(pts
-			(xy 19.05 50.8) (xy 41.91 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "05ebaf8c-bb65-495f-9c3c-b021996e3ed8")
 	)
 	(wire
 		(pts
@@ -1133,6 +1113,16 @@
 	)
 	(wire
 		(pts
+			(xy 41.91 50.8) (xy 63.5 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "145fb562-15ab-498d-9d12-3eb4c8f14bc8")
+	)
+	(wire
+		(pts
 			(xy 213.36 25.4) (xy 213.36 45.72)
 		)
 		(stroke
@@ -1220,6 +1210,16 @@
 			(type default)
 		)
 		(uuid "1d3c9a5d-9832-41b5-9524-dd5799569579")
+	)
+	(wire
+		(pts
+			(xy 152.4 30.48) (xy 172.72 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d751098-8642-4ef0-94db-bde4df68394e")
 	)
 	(wire
 		(pts
@@ -1363,16 +1363,6 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 30.48) (xy 152.4 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2b8b843e-7152-461b-90bc-381a338d54bf")
-	)
-	(wire
-		(pts
 			(xy 54.61 45.72) (xy 58.42 45.72)
 		)
 		(stroke
@@ -1393,7 +1383,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 50.8) (xy 171.45 50.8)
+			(xy 19.05 50.8) (xy 41.91 50.8)
 		)
 		(stroke
 			(width 0)
@@ -1443,16 +1433,6 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 50.8) (xy 107.95 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "33100e7f-8513-4713-804c-3cf3e7fb792b")
-	)
-	(wire
-		(pts
 			(xy 214.63 30.48) (xy 219.71 30.48)
 		)
 		(stroke
@@ -1493,6 +1473,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 50.8) (xy 86.36 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "395b5d30-ef11-4318-980e-961e17fceed8")
+	)
+	(wire
+		(pts
 			(xy 365.76 86.36) (xy 369.57 86.36)
 		)
 		(stroke
@@ -1500,16 +1490,6 @@
 			(type default)
 		)
 		(uuid "39b5db99-0dea-4d3b-ad93-c04b47c5224e")
-	)
-	(wire
-		(pts
-			(xy 86.36 30.48) (xy 107.95 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3b11aac2-297e-4a16-9f6b-7104a7dcfe95")
 	)
 	(wire
 		(pts
@@ -1873,6 +1853,16 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 30.48) (xy 152.4 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5b61970b-1315-483f-a45f-71f6513b2477")
+	)
+	(wire
+		(pts
 			(xy 321.31 45.72) (xy 325.12 45.72)
 		)
 		(stroke
@@ -2063,16 +2053,6 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 50.8) (xy 86.36 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7234d0e1-efe0-4e78-a73a-abf15c39cf39")
-	)
-	(wire
-		(pts
 			(xy 219.71 91.44) (xy 241.3 91.44)
 		)
 		(stroke
@@ -2163,6 +2143,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 30.48) (xy 130.81 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b5e276a-40a7-4848-8f5e-d5868ea3c16c")
+	)
+	(wire
+		(pts
 			(xy 191.77 25.4) (xy 191.77 45.72)
 		)
 		(stroke
@@ -2180,6 +2170,16 @@
 			(type default)
 		)
 		(uuid "7cd00593-5638-405e-b061-edab72b9ec27")
+	)
+	(wire
+		(pts
+			(xy 152.4 50.8) (xy 171.45 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d38c3ee-70fb-4f8f-8673-59cb8b9c9971")
 	)
 	(wire
 		(pts
@@ -2283,26 +2283,6 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 50.8) (xy 130.81 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8eb56bdb-ce41-455a-bc8f-993eb5b5b977")
-	)
-	(wire
-		(pts
-			(xy 130.81 50.8) (xy 152.4 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8efe6029-46b3-4115-a564-353c372d30bc")
-	)
-	(wire
-		(pts
 			(xy 236.22 66.04) (xy 236.22 86.36)
 		)
 		(stroke
@@ -2370,6 +2350,16 @@
 			(type default)
 		)
 		(uuid "9806d8f3-f297-4fa9-9956-d4bf3b077846")
+	)
+	(wire
+		(pts
+			(xy 107.95 50.8) (xy 130.81 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9823ca98-f2fe-463a-b687-cc437ce1b0da")
 	)
 	(wire
 		(pts
@@ -2503,16 +2493,6 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 50.8) (xy 63.5 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a1ac3b20-eebd-494b-8850-434776a4a63d")
-	)
-	(wire
-		(pts
 			(xy 120.65 86.36) (xy 124.46 86.36)
 		)
 		(stroke
@@ -2590,16 +2570,6 @@
 			(type default)
 		)
 		(uuid "abf90a15-2f6b-4b0e-b7fd-bc1b371dc6af")
-	)
-	(wire
-		(pts
-			(xy 63.5 30.48) (xy 86.36 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "acd32ac1-cda2-48c3-ac6e-30fcd2f0e1aa")
 	)
 	(wire
 		(pts
@@ -2813,6 +2783,16 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 50.8) (xy 152.4 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7e48437-5229-45a1-a2ae-8ad8d564235b")
+	)
+	(wire
+		(pts
 			(xy 217.17 115.57) (xy 217.17 71.12)
 		)
 		(stroke
@@ -2893,7 +2873,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 30.48) (xy 172.72 30.48)
+			(xy 41.91 30.48) (xy 63.5 30.48)
 		)
 		(stroke
 			(width 0)
@@ -3003,16 +2983,6 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 30.48) (xy 130.81 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ea9beec3-422d-4f40-bfe2-717d5ce9566d")
-	)
-	(wire
-		(pts
 			(xy 191.77 16.51) (xy 191.77 25.4)
 		)
 		(stroke
@@ -3063,6 +3033,16 @@
 	)
 	(wire
 		(pts
+			(xy 86.36 30.48) (xy 107.95 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f1d8190b-7e42-4dba-8ccf-b434182b6f98")
+	)
+	(wire
+		(pts
 			(xy 99.06 45.72) (xy 102.87 45.72)
 		)
 		(stroke
@@ -3103,6 +3083,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 30.48) (xy 86.36 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6ae2240-3249-41a8-92a6-a240ef380332")
+	)
+	(wire
+		(pts
 			(xy 181.61 16.51) (xy 191.77 16.51)
 		)
 		(stroke
@@ -3110,6 +3100,16 @@
 			(type default)
 		)
 		(uuid "f747e034-c29b-4046-8a84-ead254f8c9b1")
+	)
+	(wire
+		(pts
+			(xy 86.36 50.8) (xy 107.95 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f80d6b32-998a-424d-a11c-585765af4530")
 	)
 	(wire
 		(pts
@@ -3716,6 +3716,162 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 44.45 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "01adc8ad-df59-49f5-8faf-fa172667cbcc")
+		(property "Reference" "SW18"
+			(at 46.482 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 41.656 52.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 44.45 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 44.45 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 44.45 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 44.45 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "862eeefb-b744-4085-affc-124cb1268d95")
+		)
+		(pin "1"
+			(uuid "3b03b33f-bfec-4781-aed3-099569fe1ba8")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 44.45 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "020acbb4-d090-4c23-a7e6-d14f8d4d4952")
+		(property "Reference" "SW2"
+			(at 46.482 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 41.656 32.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 44.45 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 44.45 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 44.45 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 44.45 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "ff842f7b-db1c-476a-b0c2-85d00528a1ad")
+		)
+		(pin "1"
+			(uuid "7386d3ce-76cd-40ef-b7b3-f009bd39f195")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4148")
 		(at 161.29 45.72 180)
 		(unit 1)
@@ -3795,75 +3951,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "D23")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 44.45 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "07446be1-15e9-4f43-81a8-585ca208cb36")
-		(property "Reference" "SW18"
-			(at 46.482 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 41.656 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 44.45 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 44.45 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 44.45 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "f68ac0ca-d0fb-41ce-9144-b76549b48b2d")
-		)
-		(pin "1"
-			(uuid "c7ad60e6-8635-4f55-baed-8886ed8e0ade")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW18")
 					(unit 1)
 				)
 			)
@@ -4333,6 +4420,84 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
+		(at 66.04 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0e348b15-562a-421f-ac1d-b914e7cc6bc1")
+		(property "Reference" "SW3"
+			(at 68.072 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 63.246 32.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 66.04 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 66.04 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 66.04 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 66.04 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0a649ec5-25a6-4bbe-affd-6ed1010a3794")
+		)
+		(pin "1"
+			(uuid "86349480-bee0-4cf3-bd7b-3858a7e65c48")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
 		(at 199.39 88.9 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4710,75 +4875,6 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
-		(at 110.49 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "15ad007c-36dd-4c92-a52d-78a8f1f28f1a")
-		(property "Reference" "SW21"
-			(at 112.522 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 107.696 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 110.49 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 110.49 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 110.49 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "2952895c-46e7-47bc-9b35-dd77275aa1c6")
-		)
-		(pin "1"
-			(uuid "f84f68dc-7d98-4c84-9284-8f11d23938ed")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW21")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
 		(at 311.15 68.58 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4932,6 +5028,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 21.59 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1c1396e3-5dcb-475e-a90c-ce205eac9435")
+		(property "Reference" "SW17"
+			(at 23.622 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 18.796 52.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 21.59 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 21.59 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 21.59 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 21.59 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "86338c7e-134a-4ab3-9b5c-14a4768e7d07")
+		)
+		(pin "1"
+			(uuid "fb3696c6-368d-414e-8084-a10ab73a5eee")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4148")
 		(at 95.25 25.4 180)
 		(unit 1)
@@ -5070,6 +5244,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C131337"
+			(at 21.59 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "94000578-0a08-4a78-ae94-60a04207e8ba")
 		)
@@ -5080,75 +5263,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "SW1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 133.35 27.94 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1fce08d2-25e7-411f-a5ae-5fdbd1118393")
-		(property "Reference" "SW6"
-			(at 135.382 29.21 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 130.556 32.258 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 133.35 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 133.35 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 133.35 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "75fe51b2-27ef-461e-b623-95291e0bea8c")
-		)
-		(pin "1"
-			(uuid "f4471f34-86b0-4c59-85ca-9afd838ac7a5")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW6")
 					(unit 1)
 				)
 			)
@@ -5218,6 +5332,84 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "SW38")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 154.94 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2230cb4f-7ea0-474e-bf17-c99c9a1665cb")
+		(property "Reference" "SW7"
+			(at 156.972 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 152.146 32.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 154.94 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 154.94 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 154.94 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 154.94 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "bacf3bcf-a596-437b-8acf-d9c3f786ca69")
+		)
+		(pin "1"
+			(uuid "a3d98012-32e3-4d47-9ec3-80ed8482de0b")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW7")
 					(unit 1)
 				)
 			)
@@ -5388,6 +5580,84 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "D59")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 88.9 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "29d52297-23b7-4102-bc44-c4a2f05647cf")
+		(property "Reference" "SW4"
+			(at 90.932 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 86.106 32.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 88.9 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 88.9 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 88.9 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 88.9 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "2f2523c0-2f4e-4914-b71d-33ba8ffc5479")
+		)
+		(pin "1"
+			(uuid "8d9591e2-f035-4148-95c7-4c58eea3bc8a")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW4")
 					(unit 1)
 				)
 			)
@@ -5788,6 +6058,162 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
+		(at 177.8 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "388e57ba-5665-4f1a-b30a-7f36a3a054ab")
+		(property "Reference" "SW24"
+			(at 179.832 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 175.006 52.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 177.8 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 177.8 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 177.8 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8192496c-b82d-4390-9318-6b7e02e13493")
+		)
+		(pin "1"
+			(uuid "aba206e1-859b-480e-9951-18c73b8a4e69")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 110.49 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3c8abd47-6fe7-4cf8-bb02-469d9e300022")
+		(property "Reference" "SW21"
+			(at 112.522 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 107.696 52.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 110.49 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 110.49 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "56229e97-7b28-41df-87a7-1b1e10044322")
+		)
+		(pin "1"
+			(uuid "8815e05c-d609-45b8-854a-5aa73764d256")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
 		(at 199.39 48.26 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5850,6 +6276,84 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "SW25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 88.9 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "41dc024b-a6e6-4423-8350-d9f8367c327e")
+		(property "Reference" "SW20"
+			(at 90.932 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 86.106 52.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 88.9 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 88.9 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 88.9 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 88.9 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "2e204690-3bad-431c-9349-5c2e4c5c76a7")
+		)
+		(pin "1"
+			(uuid "7ab49bd3-407e-471e-89c9-a102752f49ca")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW20")
 					(unit 1)
 				)
 			)
@@ -5988,144 +6492,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "SW36")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 88.9 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4bd50628-1332-4606-8254-a547e5d12103")
-		(property "Reference" "SW20"
-			(at 90.932 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 86.106 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 88.9 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 88.9 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 88.9 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "7a459b9f-04de-418b-b209-19a3836ba905")
-		)
-		(pin "1"
-			(uuid "16be21ab-4e11-48d4-bfbb-1246c41001a7")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW20")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 66.04 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4bf6167b-0715-401d-b8b5-0f5490075978")
-		(property "Reference" "SW19"
-			(at 68.072 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 63.246 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 66.04 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 66.04 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 66.04 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "098e9b99-4ee3-485a-a22b-c13f2f13753c")
-		)
-		(pin "1"
-			(uuid "5f36570d-bd20-4e9e-ac76-66c36aecfed3")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW19")
 					(unit 1)
 				)
 			)
@@ -6595,15 +6961,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
-		(at 154.94 27.94 90)
+		(at 66.04 48.26 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "585b8b83-3ab5-456d-b017-900194f16719")
-		(property "Reference" "SW7"
-			(at 156.972 29.21 90)
+		(uuid "59786dca-2e50-4415-8645-0e652ec6d0b5")
+		(property "Reference" "SW19"
+			(at 68.072 49.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6612,7 +6978,7 @@
 			)
 		)
 		(property "Value" "SW_Push_45deg"
-			(at 152.146 32.258 90)
+			(at 63.246 52.578 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6621,7 +6987,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 154.94 27.94 0)
+			(at 66.04 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6630,7 +6996,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 154.94 27.94 0)
+			(at 66.04 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6639,7 +7005,16 @@
 			)
 		)
 		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 154.94 27.94 0)
+			(at 66.04 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 66.04 48.26 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6648,15 +7023,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "00063fc9-82e4-4014-9b3f-2e1cb0d0872b")
+			(uuid "34c507fe-766d-40df-924e-563e2f5b9785")
 		)
 		(pin "1"
-			(uuid "61b370b3-19fa-4002-b5d9-c424a53e4a2e")
+			(uuid "b6c7c9e0-4720-4b6c-9344-eff152f7204f")
 		)
 		(instances
-			(project "KnGYT"
+			(project "KnH0F"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW7")
+					(reference "SW19")
 					(unit 1)
 				)
 			)
@@ -6880,6 +7255,84 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "SW50")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 154.94 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5eee57a0-54f2-43c2-9629-31a16d55e5d0")
+		(property "Reference" "SW23"
+			(at 156.972 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 152.146 52.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 154.94 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 154.94 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 154.94 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 154.94 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "456bbe8b-1e4b-4e0c-b067-d4ea258f0ae8")
+		)
+		(pin "1"
+			(uuid "f7b43f8b-37f9-4cec-9f1b-a92b54ad1ebd")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW23")
 					(unit 1)
 				)
 			)
@@ -7311,6 +7764,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 177.8 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6ffa8432-e6c2-4117-a81b-fb05d83d5765")
+		(property "Reference" "SW8"
+			(at 179.832 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 175.006 32.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 177.8 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 177.8 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 177.8 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e61fe642-84bf-4185-8f35-8ea9fba7bf49")
+		)
+		(pin "1"
+			(uuid "097e1c9b-1e56-46e5-aa0a-951eb52d9c63")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4148")
 		(at 72.39 25.4 180)
 		(unit 1)
@@ -7397,6 +7928,84 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
+		(at 133.35 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "749e8253-677c-4983-a21e-7d3293e4cf97")
+		(property "Reference" "SW22"
+			(at 135.382 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 130.556 52.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 133.35 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 133.35 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 133.35 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 133.35 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "992149fc-818d-4e28-b878-b19c8aed5481")
+		)
+		(pin "1"
+			(uuid "43423a65-08c1-4a32-81a3-781cee41244c")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
 		(at 133.35 88.9 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -7459,75 +8068,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "SW54")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 110.49 27.94 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "76b09744-5204-4186-a285-0efe14fc4bf6")
-		(property "Reference" "SW5"
-			(at 112.522 29.21 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 107.696 32.258 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 110.49 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 110.49 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 110.49 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "186a93aa-2d9e-4c71-beee-783df43f3cdd")
-		)
-		(pin "1"
-			(uuid "4c06bb52-4a49-49b8-acc9-b4130202dd56")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW5")
 					(unit 1)
 				)
 			)
@@ -8421,6 +8961,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 110.49 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "84636b96-bd17-424f-ad77-b5f8c0a200c3")
+		(property "Reference" "SW5"
+			(at 112.522 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 107.696 32.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 110.49 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 110.49 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 110.49 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 110.49 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "2d31f640-b7cd-4315-883f-15db761c7597")
+		)
+		(pin "1"
+			(uuid "bd53519c-734d-4c3b-8389-0b1548a428e8")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4148")
 		(at 361.95 45.72 180)
 		(unit 1)
@@ -8500,75 +9118,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "D32")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 21.59 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8b539d71-e720-4c1c-be07-bf6bd0720d9d")
-		(property "Reference" "SW17"
-			(at 23.622 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 18.796 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 21.59 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 21.59 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 21.59 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "616f4da2-d66d-4c69-90ec-2df10b3f8a45")
-		)
-		(pin "1"
-			(uuid "3e9c4ec4-0030-434e-ad6c-7a613ef1416f")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW17")
 					(unit 1)
 				)
 			)
@@ -9516,75 +10065,6 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
-		(at 88.9 27.94 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a1ecf5b1-1eca-4989-94d7-90ae60ce3914")
-		(property "Reference" "SW4"
-			(at 90.932 29.21 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 86.106 32.258 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 88.9 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 88.9 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 88.9 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "e76ad5fe-58bc-48d0-ace7-574a4a9b8ecc")
-		)
-		(pin "1"
-			(uuid "2484a404-c49b-48ce-9099-1492ece08695")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
 		(at 266.7 48.26 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9817,75 +10297,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "D26")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 177.8 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a895e83a-7a43-4ec1-9048-f062872ff082")
-		(property "Reference" "SW24"
-			(at 179.832 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 175.006 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 177.8 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 177.8 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 177.8 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "cb61337b-d14e-45c8-8ee8-a6ccc39c8e6b")
-		)
-		(pin "1"
-			(uuid "acb585a8-19c3-4857-ae00-968ea797a4d7")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW24")
 					(unit 1)
 				)
 			)
@@ -10194,75 +10605,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "SW62")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 44.45 27.94 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b1288f45-b5ec-4a80-a656-b926fd5b5e8b")
-		(property "Reference" "SW2"
-			(at 46.482 29.21 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 41.656 32.258 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 44.45 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 44.45 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 44.45 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "3e771fa3-4128-406a-b345-b617b5899842")
-		)
-		(pin "1"
-			(uuid "1af27dfb-b4f6-42b1-9648-53b7896852c5")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW2")
 					(unit 1)
 				)
 			)
@@ -11040,75 +11382,6 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
-		(at 177.8 27.94 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "bcef1e13-b9c7-4954-b3b8-68eac268cf4f")
-		(property "Reference" "SW8"
-			(at 179.832 29.21 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 175.006 32.258 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 177.8 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 177.8 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 177.8 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "60177acd-bacc-44b8-b786-c8a4c70d62f5")
-		)
-		(pin "1"
-			(uuid "7b2c6330-cd7a-4514-b2e0-9181f06d6f7f")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
 		(at 110.49 88.9 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11777,75 +12050,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 66.04 27.94 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d32cbe81-1c9d-43d7-ad6d-e8b01ad8ac9a")
-		(property "Reference" "SW3"
-			(at 68.072 29.21 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 63.246 32.258 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 66.04 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 66.04 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 66.04 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "2bdc1a0b-2430-4109-ad5b-daef8ae7703e")
-		)
-		(pin "1"
-			(uuid "4f794187-77f4-4917-b9d8-3223c3c2bbff")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Diode:1N4148")
 		(at 339.09 45.72 180)
 		(unit 1)
@@ -12079,6 +12283,84 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "D25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push_45deg")
+		(at 133.35 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d81c8e5c-12fc-4eb1-96fc-5f20a0466a31")
+		(property "Reference" "SW6"
+			(at 135.382 29.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push_45deg"
+			(at 130.556 32.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 133.35 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 133.35 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
+			(at 133.35 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C131337"
+			(at 133.35 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f9fb9ef8-6611-4a5e-bcb4-ad04d6949ba6")
+		)
+		(pin "1"
+			(uuid "c04715f2-75fc-4faf-8af7-655518681386")
+		)
+		(instances
+			(project "KnH0F"
+				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
+					(reference "SW6")
 					(unit 1)
 				)
 			)
@@ -13111,75 +13393,6 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_45deg")
-		(at 154.94 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f2549bdd-b746-4acc-889f-283eb1b7668f")
-		(property "Reference" "SW23"
-			(at 156.972 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 152.146 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 154.94 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 154.94 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 154.94 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "c6e94006-7a7a-4ff4-86a8-c4f71f1b49fe")
-		)
-		(pin "1"
-			(uuid "2aacd8a7-22cd-484b-a30a-18385767964b")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW23")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
 		(at 355.6 88.9 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13497,75 +13710,6 @@
 			(project "KnGYT"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
 					(reference "D24")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_Push_45deg")
-		(at 133.35 48.26 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fdb3e94b-f184-4faa-adf6-028ae1534b37")
-		(property "Reference" "SW22"
-			(at 135.382 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "SW_Push_45deg"
-			(at 130.556 52.578 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 133.35 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 133.35 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, normally open, two pins, 45° tilted"
-			(at 133.35 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "708b2f26-a5d5-41b7-b67f-7f1aea15fc95")
-		)
-		(pin "1"
-			(uuid "0c5555a1-202a-4382-9442-6227165fa586")
-		)
-		(instances
-			(project "KnGYT"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55/46591ea8-e179-4064-9f4e-82614b93bcb7"
-					(reference "SW22")
 					(unit 1)
 				)
 			)
