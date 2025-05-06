@@ -107,6 +107,9 @@ class RingRGB(MacroPawRGB):
                                           self.num_pixels + self._tail, None,
                                           (0, 0, 64)))
 
+    def handle_update(self, update):
+        pass
+
     @staticmethod
     def _animate(self):
         if not self._elements:

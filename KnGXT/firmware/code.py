@@ -61,9 +61,9 @@ class Layers(_Layers):
 def setup_macropaw(debug, kbd):
     ring_color = (0, 0, 64) if debug.enabled else (0, 64, 0)
     kbd.setup_animation(ring_color=ring_color,
-                        animation_mode=AnimationModes.BREATHING,
+                        animation_mode=AnimationModes.USER,
                         hue_default=128,
-                        animation_speed=2)
+                        animation_speed=4)
     kbd.setup_mapswitchers()
 
     layers = Layers()
