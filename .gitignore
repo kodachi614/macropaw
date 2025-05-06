@@ -4,3 +4,6 @@
 */hardware/fp-info-cache
 *.img
 *.zip
+*.uf2
+!flash_nuke.uf2
+kmk-tarfile.tgz

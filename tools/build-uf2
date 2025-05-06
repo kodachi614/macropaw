@@ -1,4 +1,4 @@
-set -ex
+set -e
 
 # Builds a MacroPaw UF2 image from the CircuitPython base image,
 # a KMK tarfile, and firmware files in a local directory.
@@ -9,9 +9,12 @@ cd $(dirname $0)
 
 BOARD_ID="$1"
 BASE_DIR="$2"
+VOLNAME="${3:-MACROPAW}"
+
+echo "Building UF2 for $BOARD_ID ($VOLNAME) in $BASE_DIR..."
 
 TOOLS=${BASE_DIR}/tools
-BASE_FIRMWARE=${TOOLS}/base-firmware.uf2
+BASE_FIRMWARE=${TOOLS}/base-firmware-${BOARD_ID}.uf2
 KMK_TARFILE=${TOOLS}/kmk-tarfile.tgz
 
 TMP=${TMPDIR:-/tmp}
@@ -31,7 +34,7 @@ if [ $(uname -s) == "Darwin" ]; then
     echo "==== Setting up for MacOS..."
 
     # Set up for MacOS. !*@&#!*& portability issues...
-    MOUNTPOINT=/Volumes/MACROPAW
+    MOUNTPOINT=/Volumes/uf2-work
 
     # Make sure things are OK.
     if [ -d $MOUNTPOINT ]; then
@@ -50,7 +53,7 @@ else
     echo "==== Setting up for Linux..."
 
     # Set up for Linux. !*@&#!*& portability issues...
-    MOUNTPOINT=$TMP/mnt
+    MOUNTPOINT=$TMP/uf2-work
 
     echo "We need to run mount with sudo; you might need to enter your password."
 
@@ -77,9 +80,9 @@ echo "==== Mounting work volume..."
 rm -f $WORK_IMAGE
 dd if=/dev/zero of=$WORK_IMAGE bs=1M count=8 2>/dev/null
 
-mkfs.fat -n "MACROPAW" -m - $WORK_IMAGE >/dev/null <<EOF
+mkfs.fat -n "$VOLNAME" -m - $WORK_IMAGE >/dev/null <<EOF
 This is not a bootable disk; it contains firmware for the
-Kodachi 6 14 MacroPaw KnGXT. Please don't try to boot it.
+Kodachi 6 14 $BOARD_ID keyboard. Please don't try to boot it.
 EOF
 
 mount_image "$WORK_IMAGE" "$MOUNTPOINT"
