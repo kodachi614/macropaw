@@ -14,11 +14,11 @@ new firmware UF2 to flash to the board. This is especially true if you want to
 distribute the firmware to others, or if you want to make sure that the
 firmware is in a known-good state.
 
-## The Simple Way
+## Building The Firmware The Simple Way
 
-If all you want to do is tweak the MacroPaw code itself, and you don't need to
+If all you've done is to the MacroPaw code itself, and you don't need to
 either add support for a new kind of MacroPaw board or upgrade the version of
-KMK in use, just clone the `kodachi614/macropaw` repo and run `make` in it.
+KMK in use, just clone this `kodachi614/macropaw` repo and run `make` in it.
 This will build firmware for all supported boards and leave the resulting UF2
 images in `macropaw-$boardID.uf2` files in the root of the repo.
 
@@ -116,7 +116,11 @@ For example, to build just the firmware for the KnGXT, run `make KnGXT`.
 To flash the firmware, put the MacroPaw board into bootloader mode. How you do
 this depends on the board you have, but it's generally a matter of holding
 down some BOOT button while plugging it into your computer. Once it's in
-bootloader mode, it should show up as a USB drive called "RPI_RP2": just copy
-the `macropaw-$boardID.uf2` file onto that drive. The board will reboot into
-its hardware test mode; follow the directions for your board to complete the
-hardware test and have it reboot into being a keyboard!
+bootloader mode, it should show up as a USB drive called "RPI_RP2".
+
+Once you have `RPI_RP2` mounted, on MacOS run `tools/flash $boardID` (e.g.
+`tools/flash KnGXT`. If you're not on MacOS, `cp tools/flash_nuke.uf2` to the
+RPI-RP2 volume, then once the board reboots, `cp macropaw-$boardID.uf2` to the
+RPI-RP2 volume. The board will reboot into its hardware test mode; follow the
+directions for your board to complete the hardware test and have it reboot
+into being a keyboard!

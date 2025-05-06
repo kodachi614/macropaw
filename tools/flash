@@ -2,6 +2,13 @@
 
 BOARDID="$1"
 
+if [ \( $(uname -s) != "Darwin" \) ]; then
+    echo "$(basename $0) is for MacOS".
+    echo "Just `cp tools/flash_nuke.uf2` to the RPI-RP2 volume, wait for it" >&2
+    echo "to return, and then `cp macropaw-$BOARDID` to the RPI-RP2 volume" >&2
+    exit 0
+fi
+
 wait_boot_volume() {
     local echoed=
     local tries=60
@@ -78,6 +85,7 @@ fi
 diskutil eject /Volumes/RPI-RP2 >/dev/null 2>&1
 
 wait_no_boot_volume
+sleep 1
 wait_boot_volume
 sleep 1
 
