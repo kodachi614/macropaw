@@ -54,7 +54,11 @@ KMK_URL=https://www.kodachi.com/firmware/kmk-$(KMK_VERSION).tgz
 # is specific to a given board.
 
 define board_rule
-macropaw-$1.uf2: tools/base-firmware-$1.uf2 tools/kmk-tarfile.tgz $(wildcard $1/firmware/*.py)
+macropaw-$1.uf2: tools/base-firmware-$1.uf2 \
+                 tools/kmk-tarfile.tgz \
+				 $(wildcard $1/firmware/*.py) \
+				 $(wildcard common/*.py) \
+				 $(wildcard common/lib/*)
 	@echo "\n== Building $$@..."
 	bash tools/build-uf2 $1 $$$$(pwd) $(VOLNAME)
 

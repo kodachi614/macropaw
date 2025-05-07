@@ -25,65 +25,44 @@ import supervisor
 # pretty blinding. Crank that down.
 supervisor.runtime.rgb_status_brightness = 16
 
-import os
-import storage
-import usb_cdc
+import board
 
 from firstboot import FirstBoot
-from bootkeys import BootKeys
+from bootmanager import BootManager, TriggerRowCombo
 
 # Start by assuming that nothing special is going on.
 enable_hardware_test = False
 enable_mass_storage = False
 
 firstboot = FirstBoot()
-bootkeys = BootKeys()
+
+# Use the first LEDs for boot status. If we try to use more than one,
+# and fewer than all, things get weird because of the electrical order
+# for the LEDs on this board.
+bootmgr = BootManager(1,
+    # Mass storage: hold down the left- & rightmost keys on the top row.
+    TriggerRowCombo(board.ROW0, board.COL0, board.COL4),
+
+    # Hardware test: hold down the left- & rightmost keys on the bottom row.
+    TriggerRowCombo(board.ROW1, board.COL0, board.COL4),
+)
 
 if firstboot.check():
     # First boot. Enable hardware test mode.
     enable_hardware_test = True
 
-# Next up, check key combinations. BootKeys will also handle using the LEDs to
-# indicate what mode you're in.
+# Next up, check key combinations. The BootManager will also handle using the
+# LEDs to indicate what mode you're in.
 
-if bootkeys.check_mass_storage():
+if bootmgr.check_mass_storage():
     enable_mass_storage = True
 
-if bootkeys.check_hardware_test():
+if bootmgr.check_hardware_test():
     enable_hardware_test = True
 
-# Manage the /hardware_test file depending on whether we're in
-# hardware test mode or not.
+# Actually take action on the special modes.
+bootmgr.set_hardware_test(enable_hardware_test)
+bootmgr.set_mass_storage(enable_mass_storage, enable_hardware_test)
 
-try:
-    storage.remount("/", readonly=False)
-except Exception as e:
-    print(f"boot: could not remount / read-write: {e}")
-
-if enable_hardware_test:
-    try:
-        with open("/hardware_test", "w") as f:
-            f.write("1")
-    except Exception as e:
-        print(f"boot: can't create /hardware_test: {e}")
-else:
-    try:
-        os.remove("/hardware_test")
-    except:
-        pass
-
-try:
-    storage.remount("/", readonly=True)
-except Exception as e:
-    print(f"boot: could not remount / read-only: {e}")
-
-if not enable_mass_storage:
-    # Disable mass storage:
-    storage.disable_usb_drive()
-
-    if not enable_hardware_test:
-        # Disable USB serial.
-        usb_cdc.disable()
-
-bootkeys.wait_for_release()
-bootkeys.deinit()
+bootmgr.wait_for_release()
+bootmgr.deinit()
