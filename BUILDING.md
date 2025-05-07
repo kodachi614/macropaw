@@ -2,6 +2,19 @@
 
 This document describes how to build the MacroPaw firmware from source.
 
+## Prerequisites
+
+**This is version 0.1.0 of the MacroPaw firmware.** It is based on
+
+- CircuitPython 8.1.0 built from commit `74018dc` on the `flynn/kodachi-ports`
+  branch of
+  [kodachi614/circuitpython](https://github.com/kodachi614/circuitpython)
+
+- KMK built from commit `8913b23d5` on the `flynn/dev/macropaw` branch of
+  [kodachi614/kmk_firmware](https://github.com/kodachi614/kmk_firmware)
+
+If you try to use other versions, expect to have to do porting.
+
 ## Testing Tweaks
 
 If you're still testing tweaks to the MacroPaw code itself, don't bother
