@@ -40,8 +40,8 @@ all: $(BOARDS) $(CUSTOM_BOARDS)
 # fetched from www.kodachi.com.
 
 KMK_DIR="../../kmk_firmware/kmk"
-CIRCUITPYTHON_BASE_VERSION=8.1.0-gaf5ee803
-KMK_VERSION=8913b23d5a72dc7bad84ba28be4cbe9d48031848
+CIRCUITPYTHON_BASE_VERSION=9.2.7-gcfd99a5795
+KMK_VERSION=e176c41b1da45b808300f5208d7eb44f783e4531
 
 CIRCUITPYTHON_BASE_URL=https://www.kodachi.com/firmware/circuitpython-kodachi-$(CIRCUITPYTHON_BASE_VERSION)
 KMK_URL=https://www.kodachi.com/firmware/kmk-$(KMK_VERSION).tgz
