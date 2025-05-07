@@ -145,6 +145,8 @@ class MacroPawKeyboard(KMKKeyboard):
     will be useful, though.
     """
     def __init__(self):
+        super().__init__()
+
         # Pins to use when scanning keys
         self.col_pins = (board.COL0, board.COL1, board.COL2, board.COL3)
         self.row_pins = (board.ROW0, board.ROW1, board.ROW2, board.ROW3, board.ROW4)
