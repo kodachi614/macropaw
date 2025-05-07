@@ -28,6 +28,10 @@ class PixelSlice:
 
         self.mapping = mapping or list(range(self.len))
 
+    # Our deinit needn't do anything; our parent can handle it.
+    def deinit(self):
+        pass
+
     def fill(self, color):
         # Don't worry about the order mapping here, since we're doing everything.
         self.parent[self.offset:self.offset+self.len] = [color] * self.len
