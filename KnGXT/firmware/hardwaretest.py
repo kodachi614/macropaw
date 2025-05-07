@@ -21,7 +21,7 @@
 import microcontroller
 import time
 
-from kmk.keys import KC
+from kmk.keys import make_key
 
 from firstboot import FirstBoot
 
@@ -30,14 +30,9 @@ class HardwareTestRing:
         self.callback = callback
         self.pixels = pixels
 
-        self.red = KC.NO.clone()
-        self.red.after_press_handler(self._red)
-
-        self.green = KC.NO.clone()
-        self.green.after_press_handler(self._green)
-
-        self.blue = KC.NO.clone()
-        self.blue.after_press_handler(self._blue)
+        self.red = make_key(names=["HW_red"], on_press=self._red)
+        self.green = make_key(names=["HW_green"], on_press=self._green)
+        self.blue = make_key(names=["HW_blue"], on_press=self._blue)
 
         self._shown = [False, False, False]
 
@@ -71,16 +66,19 @@ class HardwareTestMatrix:
         self.last = len(self.colors) - 1
         self.indices = [ -1 ] * len(pixels)
 
-        self.keys = [ KC.NO.clone() for i in range(len(pixels)) ]
+        self.keys = []
 
         for i in range(len(pixels)):
             # This stupid idx=i business is how you do Python lambda
             # closures. I hate it.
-            self.keys[i].after_press_handler(
-                lambda key, keyboard, *args, idx=i: self._press(idx)
+            self.keys.append(
+                make_key(
+                    names=[f"HW_matrix_{i}"],
+                    on_press=lambda key, keyboard, *args, idx=i: self._press(keyboard, idx)
+                )
             )
 
-    def _press(self, i):
+    def _press(self, keyboard, i):
         self.indices[i] = self.indices[i] + 1
 
         if self.indices[i] > self.last:
@@ -90,6 +88,8 @@ class HardwareTestMatrix:
         self.pixels[i] = color
 
         self.callback(all(map(lambda x: x == self.last, self.indices)))
+
+        return keyboard
 
 
 class HardwareTestRunner:

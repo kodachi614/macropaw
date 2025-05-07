@@ -30,14 +30,13 @@ from macropawrgb import MacroPawRGB
 from ringrgb import RingRGB
 from keymapper import Keymapper
 
-from kmk.keys import KC
+from kmk.keys import KC, Key, make_key
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.scanners import DiodeOrientation
 from kmk.scanners.encoder import RotaryioEncoder
 from kmk.scanners.keypad import MatrixScanner
 from kmk.extensions.media_keys import MediaKeys
 from kmk.utils import Debug
-
 
 # Debugging assistance: log when something happens. This is a barebones
 # trace facility, basically.
@@ -60,6 +59,47 @@ def dump_times():
         delta_s = (ms - prev_time) / 1000
 
         print("%8.3fs %s" % (delta_s, name))
+
+def internal_key(name, on_press=None, on_release=None) -> Key:
+    """
+    A Key is the KMK representation of a key on the keyboard. internal_key
+    creates a Key with a name and optional press/release handlers that doesn't
+    do anything except call the handlers -- so it doesn't actually send any
+    keycodes to the host. This is useful for keys that are used to control
+    things about the keyboard itself, like switching layers, keymaps, or
+    animations.
+
+    For a key that needs to send a keycode, see chained_key.
+    """
+    return make_key(names=[name], on_press=on_press, on_release=on_release)
+
+def chained_key(name, original_key, on_press=None, on_release=None) -> Key:
+    """
+    A Key is the KMK representation of a key on the keyboard. chained_key
+    takes some existing Key and creates a new Key that does exactly what that
+    key does, but calls the given press/release handlers after the existing
+    Key's press/release handlers.
+
+    This is useful for keys that _do_ need to send a keycode, but that also
+    need to mess with the state of the keyboard itself, like sending "Volume
+    Up" but _also_ triggering an animation.
+
+    Really this should be built into KMK...
+    """
+
+    def __press_handler(key, keyboard, kc, coord_int):
+        original_key.on_press(keyboard, coord_int)
+
+        if on_press is not None:
+            on_press(key, keyboard, kc, coord_int)
+
+    def __release_handler(key, keyboard, kc, coord_int):
+        original_key.on_release(keyboard, coord_int)
+
+        if on_release is not None:
+            on_release(key, keyboard, kc, coord_int)
+
+    return make_key(names=[name], on_press=__press_handler, on_release=__release_handler)
 
 
 class MacroPawKeyboard(KMKKeyboard):
@@ -205,11 +245,8 @@ class MacroPawKeyboard(KMKKeyboard):
 
     def setup_mapswitchers(self):
         # Keys to switch to a different keymap
-        self.SwitchToDvorak = KC.NO.clone()
-        self.SwitchToDvorak.after_press_handler(self.switch_to_Dvorak)
-
-        self.SwitchToQWERTY = KC.NO.clone()
-        self.SwitchToQWERTY.after_press_handler(self.switch_to_QWERTY)
+        self.SwitchToDvorak = internal_key("SW_Dvorak", on_press=self.switch_to_Dvorak)
+        self.SwitchToQWERTY = internal_key("SW_QWERTY", on_press=self.switch_to_QWERTY)
 
     def setup_animation(self, ring_color, **kwargs):
         self.rgb_ring1 = RingRGB(name="RING1", pixels=self.leds_ring1)
@@ -231,26 +268,26 @@ class MacroPawKeyboard(KMKKeyboard):
         self.extensions.append(self.rgb_ring1)
         self.extensions.append(self.rgb_ring2)
 
-        self.KeyAnimationCycle = KC.NO.clone()
-        self.KeyAnimationCycle.after_press_handler(self.rgb_matrix.next_animation)
+        self.KeyAnimationCycle = internal_key("NextAnim",
+                                            on_press=self.rgb_matrix.next_animation)
 
-        self.KeyVolDown = KC.VOLD.clone()
-        self.KeyVolDown.after_press_handler(self.rgb_ring1.inject_ccw)
+        self.KeyVolDown = chained_key("KeyVolDown", KC.VOLD,
+                                      on_press=self.rgb_ring1.inject_ccw)
 
-        self.KeyVolUp = KC.VOLU.clone()
-        self.KeyVolUp.after_press_handler(self.rgb_ring1.inject_cw)
+        self.KeyVolUp = chained_key("KeyVolUp", KC.VOLU,
+                                    on_press=self.rgb_ring1.inject_cw)
 
-        self.KeyMute = KC.MUTE.clone()
-        self.KeyMute.after_press_handler(self.rgb_ring1.inject_fan)
+        self.KeyMute = chained_key("KeyMute", KC.MUTE,
+                                   on_press=self.rgb_ring1.inject_fan)
 
-        self.KeyPrevTrack = KC.MRWD.clone()
-        self.KeyPrevTrack.after_press_handler(self.rgb_ring2.inject_ccw)
+        self.KeyPrevTrack = chained_key("KeyPrevTrack", KC.MRWD,
+                                        on_press=self.rgb_ring2.inject_ccw)
 
-        self.KeyNextTrack = KC.MFFD.clone()
-        self.KeyNextTrack.after_press_handler(self.rgb_ring2.inject_cw)
+        self.KeyNextTrack = chained_key("KeyNextTrack", KC.MFFD,
+                                        on_press=self.rgb_ring2.inject_cw)
 
-        self.KeyPlay = KC.MPLY.clone()
-        self.KeyPlay.after_press_handler(self.rgb_ring2.inject_fan)
+        self.KeyPlay = chained_key("KeyPlay", KC.MPLY,
+                                   on_press=self.rgb_ring2.inject_fan)
 
 
 def Main(name, user_setup):
