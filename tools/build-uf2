@@ -114,6 +114,23 @@ mkdir $MOUNTPOINT/lib/kmk
 ( cd $MOUNTPOINT/lib/kmk ; \
   tar xz --no-same-owner --exclude __pycache__ --file ${KMK_TARFILE} )
 
+# If mpy-cross is available, use it.
+if [ -x ${BASE_DIR}/mpy-cross ]; then
+    echo "==== Compiling Python files..."
+
+    # Compile all the Python files in the firmware directory.
+    find $MOUNTPOINT \
+         \( -name '*.py' -a \! \( -name 'code.py' -o -name 'boot.py' \) \) \
+         -exec ${BASE_DIR}/mpy-cross {} \;
+
+    # Remove the original Python files.
+    find $MOUNTPOINT \
+         \( -name '*.py' -a \! \( -name 'code.py' -o -name 'boot.py' \) \) \
+         -print0 | xargs -0 rm -f
+else
+    echo "==== No mpy-cross found; not compiling Python files."
+fi
+
 # Finally, arrange for the MacroPaw to enter hardware test on first boot.
 touch $MOUNTPOINT/firstboot
 
