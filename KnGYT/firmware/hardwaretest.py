@@ -18,13 +18,12 @@
 # You should have received a copy of the GNU General Public License along
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
-import errno
 import microcontroller
-import os
-import storage
 import time
 
-from kmk.keys import KC
+from kmk.keys import make_key
+
+from firstboot import FirstBoot
 
 
 class HardwareTestMatrix:
@@ -35,16 +34,20 @@ class HardwareTestMatrix:
         self.last = len(self.colors) - 1
         self.indices = [ -1 ] * len(pixels)
 
-        self.keys = [ KC.NO.clone() for i in range(len(pixels)) ]
+        self.keys = []
 
         for i in range(len(pixels)):
             # This stupid idx=i business is how you do Python lambda
             # closures. I hate it.
-            self.keys[i].after_press_handler(
-                lambda key, keyboard, *args, idx=i: self._press(idx)
+            self.keys.append(
+                make_key(
+                    names=[f"HW_matrix_{i}"],
+                    on_press=lambda key, keyboard, *args, idx=i: self._press(keyboard, idx)
+                )
             )
 
-    def _press(self, i):
+
+    def _press(self, keyboard, i):
         self.indices[i] = self.indices[i] + 1
 
         if self.indices[i] > self.last:
@@ -55,10 +58,12 @@ class HardwareTestMatrix:
 
         self.callback(all(map(lambda x: x == self.last, self.indices)))
 
+        return keyboard
 
 class HardwareTestRunner:
-    def __init__(self, keyboard):
+    def __init__(self, keyboard, firstboot):
         self.keyboard = keyboard
+        self.firstboot = firstboot
         self.matrix_status = False
 
     def go(self):
@@ -80,36 +85,17 @@ class HardwareTestRunner:
 
     def check_status(self):
         if self.matrix_status:
+            # All done. Kill all the lights...
             self.keyboard.leds_matrix.fill((0, 64, 0))
 
-            failed = False
-
-            try:
-                storage.remount("/", readonly=False)
-            except Exception as e:
-                print(f"Error remounting /: {e}")
-                failed = True
-
-            if not failed:
-                try:
-                    os.remove("/firstboot")
-                    print(f"Removed /firstboot")
-                except Exception as e:
-                    if e.errno != errno.ENOENT:
-                        print(f"Error removing /firstboot: {e} ")
-                        failed = True
-                    else:
-                        print("/firstboot already removed?")
-
-                storage.remount("/", readonly=True)
-
+            # ...and clear firstboot.
+            if self.firstboot.clear():
                 print("Rebooting...")
                 microcontroller.reset()
-
-            if failed:
+            else:
                 self.keyboard.leds_matrix.fill((64, 0, 0))
 
 
 def setup_hardware_test(debug, keyboard):
-    runner = HardwareTestRunner(keyboard)
+    runner = HardwareTestRunner(keyboard, FirstBoot())
     runner.go()

@@ -29,10 +29,9 @@ from pixelslice import PixelSlice
 from macropawrgb import MacroPawRGB
 from keymapper import Keymapper
 
-from kmk.keys import KC
+from kmk.keys import KC, Key, make_key
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.scanners import DiodeOrientation
-from kmk.scanners.encoder import RotaryioEncoder
 from kmk.scanners.keypad import MatrixScanner
 from kmk.extensions.media_keys import MediaKeys
 from kmk.utils import Debug
@@ -61,6 +60,48 @@ def dump_times():
         print("%8.3fs %s" % (delta_s, name))
 
 
+def internal_key(name, on_press=None, on_release=None) -> Key:
+    """
+    A Key is the KMK representation of a key on the keyboard. internal_key
+    creates a Key with a name and optional press/release handlers that doesn't
+    do anything except call the handlers -- so it doesn't actually send any
+    keycodes to the host. This is useful for keys that are used to control
+    things about the keyboard itself, like switching layers, keymaps, or
+    animations.
+
+    For a key that needs to send a keycode, see chained_key.
+    """
+    return make_key(names=[name], on_press=on_press, on_release=on_release)
+
+def chained_key(name, original_key, on_press=None, on_release=None) -> Key:
+    """
+    A Key is the KMK representation of a key on the keyboard. chained_key
+    takes some existing Key and creates a new Key that does exactly what that
+    key does, but calls the given press/release handlers after the existing
+    Key's press/release handlers.
+
+    This is useful for keys that _do_ need to send a keycode, but that also
+    need to mess with the state of the keyboard itself, like sending "Volume
+    Up" but _also_ triggering an animation.
+
+    Really this should be built into KMK...
+    """
+
+    def __press_handler(key, keyboard, kc, coord_int):
+        original_key.on_press(keyboard, coord_int)
+
+        if on_press is not None:
+            on_press(key, keyboard, kc, coord_int)
+
+    def __release_handler(key, keyboard, kc, coord_int):
+        original_key.on_release(keyboard, coord_int)
+
+        if on_release is not None:
+            on_release(key, keyboard, kc, coord_int)
+
+    return make_key(names=[name], on_press=__press_handler, on_release=__release_handler)
+
+
 class MacroPawKeyboard(KMKKeyboard):
     """
     The MacroPawKeyboard defines the bare-bones hardware of the MacroPaw KnGYT,
@@ -85,6 +126,8 @@ class MacroPawKeyboard(KMKKeyboard):
     You'll probably never use that.
     """
     def __init__(self):
+        super().__init__()
+
         # Pins to use when scanning keys
         self.col_pins = (board.COL0, board.COL1, board.COL2, board.COL3, board.COL4)
         self.row_pins = (board.ROW0, board.ROW1)
@@ -154,11 +197,8 @@ class MacroPawKeyboard(KMKKeyboard):
 
     def setup_mapswitchers(self):
         # Keys to switch to a different keymap
-        self.SwitchToDvorak = KC.NO.clone()
-        self.SwitchToDvorak.after_press_handler(self.switch_to_Dvorak)
-
-        self.SwitchToQWERTY = KC.NO.clone()
-        self.SwitchToQWERTY.after_press_handler(self.switch_to_QWERTY)
+        self.SwitchToDvorak = internal_key("SW_Dvorak", on_press=self.switch_to_Dvorak)
+        self.SwitchToQWERTY = internal_key("SW_QWERTY", on_press=self.switch_to_QWERTY)
 
     def setup_animation(self, ring_color, **kwargs):
         self.rgb_matrix = MacroPawRGB(pixel_pin=None, pixels=(self.leds_matrix,), **kwargs)
@@ -168,8 +208,8 @@ class MacroPawKeyboard(KMKKeyboard):
 
         self.extensions.append(self.rgb_matrix)
 
-        self.KeyAnimationCycle = KC.NO.clone()
-        self.KeyAnimationCycle.after_press_handler(self.rgb_matrix.next_animation)
+        self.KeyAnimationCycle = internal_key("NextAnim",
+                                            on_press=self.rgb_matrix.next_animation)
 
 
 def Main(name, user_setup):
@@ -179,9 +219,9 @@ def Main(name, user_setup):
 
     log_time("Debug")
 
-    # if usb_cdc.console:
-    #     debug.enabled = True
-    #     print("Debugging enabled")
+    if False and usb_cdc.console:
+        debug.enabled = True
+        print("Debugging enabled")
 
     hardware_test = False
 

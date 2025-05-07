@@ -1,7 +1,7 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14
+# SPDX-FileCopyrightText: 2025 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-# Copyright 2022 Kodachi 6 14
+# Copyright 2022-2025 Kodachi 6 14
 #
 # This file is part of the MacroPaw firmware.
 #
@@ -20,85 +20,52 @@
 
 import supervisor
 
-supervisor.runtime.next_stack_limit = 16384
+# CircuitPython's supervisor will use the RGBs to single very low-level
+# status, but if we leave the brightness at the default of 255, it's
+# pretty blinding. Crank that down.
 supervisor.runtime.rgb_status_brightness = 16
 
-from adafruit_neopixelbackground import NeoPixelBackground
-
-import digitalio
-import board
 import os
 import storage
 import usb_cdc
-import time
 
-row0 = digitalio.DigitalInOut(board.ROW0)
-row0.direction = digitalio.Direction.OUTPUT
+from firstboot import FirstBoot
+from bootkeys import BootKeys
 
-row1 = digitalio.DigitalInOut(board.ROW1)
-row1.direction = digitalio.Direction.OUTPUT
-
-col0 = digitalio.DigitalInOut(board.COL0)
-col0.direction = digitalio.Direction.INPUT
-
-col4 = digitalio.DigitalInOut(board.COL4)
-col4.direction = digitalio.Direction.INPUT
-
-bootpixel = NeoPixelBackground(board.NEOPIXEL, 1, pixel_order="GRB", brightness=0.125)
-bootpixel[0] = (0, 0, 0)
-
+# Start by assuming that nothing special is going on.
 enable_hardware_test = False
 enable_mass_storage = False
 
-def check_row0():
-    rc = False
-    row0.value = True
+firstboot = FirstBoot()
+bootkeys = BootKeys()
 
-    if col0.value and col4.value:
-        rc = True
+if firstboot.check():
+    # First boot. Enable hardware test mode.
+    enable_hardware_test = True
 
-    row0.value = False
-    return rc
+# Next up, check key combinations. BootKeys will also handle using the LEDs to
+# indicate what mode you're in.
 
-def check_row1():
-    rc = False
-    row1.value = True
+if bootkeys.check_mass_storage():
+    enable_mass_storage = True
 
-    if col0.value and col4.value:
-        rc = True
+if bootkeys.check_hardware_test():
+    enable_hardware_test = True
 
-    row1.value = False
-    return rc
-
-storage.remount("/", readonly=False)
+# Manage the /hardware_test file depending on whether we're in
+# hardware test mode or not.
 
 try:
-    open("/firstboot", "r")
-    enable_hardware_test = True
-
-    # Leave /firstboot in place here. Hardware test will remove it after
-    # everything's OK.
-except:
-    pass
-
-color = [0, 0, 0]
-
-if check_row0():
-    enable_mass_storage = True
-    color[2] = 64
-
-# Why is this needed??
-time.sleep(.01)
-
-if check_row1():
-    enable_hardware_test = True
-    color[0] = 64
-
-bootpixel[0] = tuple(color)
+    storage.remount("/", readonly=False)
+except Exception as e:
+    print(f"boot: could not remount / read-write: {e}")
 
 if enable_hardware_test:
-    with open("/hardware_test", "w") as f:
-        f.write("1")
+    try:
+        with open("/hardware_test", "w") as f:
+            f.write("1")
+    except Exception as e:
+        print(f"boot: can't create /hardware_test: {e}")
 else:
     try:
         os.remove("/hardware_test")
@@ -108,23 +75,15 @@ else:
 try:
     storage.remount("/", readonly=True)
 except Exception as e:
-    print(f"could not remount /: {e}")
+    print(f"boot: could not remount / read-only: {e}")
 
 if not enable_mass_storage:
-    # Disable mass storage and USB serial.
+    # Disable mass storage:
     storage.disable_usb_drive()
 
     if not enable_hardware_test:
+        # Disable USB serial.
         usb_cdc.disable()
 
-while check_row0() or check_row1():
-    time.sleep(0.01)
-
-bootpixel[0] = (0, 0, 0)
-bootpixel._sm.deinit()
-
-row0.deinit()
-row1.deinit()
-col0.deinit()
-col4.deinit()
-
+bootkeys.wait_for_release()
+bootkeys.deinit()
