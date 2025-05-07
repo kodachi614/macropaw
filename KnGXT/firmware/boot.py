@@ -20,7 +20,9 @@
 
 import supervisor
 
-supervisor.runtime.next_stack_limit = 16384
+# CircuitPython's supervisor will use the RGBs to single very low-level
+# status, but if we leave the brightness at the default of 255, it's
+# pretty blinding. Crank that down.
 supervisor.runtime.rgb_status_brightness = 16
 
 from adafruit_neopixelbackground import NeoPixelBackground
