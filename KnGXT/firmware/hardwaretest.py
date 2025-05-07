@@ -18,14 +18,12 @@
 # You should have received a copy of the GNU General Public License along
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
-import errno
 import microcontroller
-import os
-import storage
 import time
 
 from kmk.keys import KC
 
+from firstboot import FirstBoot
 
 class HardwareTestRing:
     def __init__(self, callback, pixels):
@@ -95,8 +93,9 @@ class HardwareTestMatrix:
 
 
 class HardwareTestRunner:
-    def __init__(self, keyboard):
+    def __init__(self, keyboard, firstboot):
         self.keyboard = keyboard
+        self.firstboot = firstboot
 
         self.ring1_status = False
         self.ring2_status = False
@@ -143,40 +142,21 @@ class HardwareTestRunner:
 
     def check_status(self):
         if self.ring1_status and self.ring2_status and self.matrix_status:
+            # All done. Kill all the lights...
             self.keyboard.leds_ring1.fill((0, 64, 0))
             self.keyboard.leds_ring2.fill((0, 64, 0))
             self.keyboard.leds_matrix.fill((0, 64, 0))
 
-            failed = False
-
-            try:
-                storage.remount("/", readonly=False)
-            except Exception as e:
-                print(f"Error remounting /: {e}")
-                failed = True
-
-            if not failed:
-                try:
-                    os.remove("/firstboot")
-                    print(f"Removed /firstboot")
-                except Exception as e:
-                    if e.errno != errno.ENOENT:
-                        print(f"Error removing /firstboot: {e} ")
-                        failed = True
-                    else:
-                        print("/firstboot already removed?")
-
-                storage.remount("/", readonly=True)
-
+            # ...and clear firstboot.
+            if self.firstboot.clear():
                 print("Rebooting...")
                 microcontroller.reset()
-
-            if failed:
+            else:
                 self.keyboard.leds_ring1.fill((64, 0, 0))
                 self.keyboard.leds_ring2.fill((64, 0, 0))
                 self.keyboard.leds_matrix.fill((64, 0, 0))
 
 
 def setup_hardware_test(debug, keyboard):
-    runner = HardwareTestRunner(keyboard)
+    runner = HardwareTestRunner(keyboard, FirstBoot())
     runner.go()

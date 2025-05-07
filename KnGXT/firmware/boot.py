@@ -25,82 +25,47 @@ import supervisor
 # pretty blinding. Crank that down.
 supervisor.runtime.rgb_status_brightness = 16
 
-from adafruit_neopixelbackground import NeoPixelBackground
-
-import digitalio
-import board
 import os
 import storage
 import usb_cdc
-import time
 
-row0 = digitalio.DigitalInOut(board.ROW0)
-row0.direction = digitalio.Direction.OUTPUT
+from firstboot import FirstBoot
+from bootkeys import BootKeys
 
-row4 = digitalio.DigitalInOut(board.ROW4)
-row4.direction = digitalio.Direction.OUTPUT
-
-col1 = digitalio.DigitalInOut(board.COL1)
-col1.direction = digitalio.Direction.INPUT
-
-col2 = digitalio.DigitalInOut(board.COL2)
-col2.direction = digitalio.Direction.INPUT
-
-col3 = digitalio.DigitalInOut(board.COL3)
-col3.direction = digitalio.Direction.INPUT
-
-bootpixel = NeoPixelBackground(board.NEOPIXEL, 1, pixel_order="GRB", brightness=0.125)
-bootpixel[0] = (0, 0, 0)
-
+# Start by assuming that nothing special is going on.
 enable_hardware_test = False
 enable_mass_storage = False
 
-def check_row0():
-    rc = False
-    row0.value = True
+firstboot = FirstBoot()
+bootkeys = BootKeys()
 
-    if col1.value and col3.value:
-        rc = True
+if firstboot.check():
+    # First boot. Enable hardware test mode.
+    enable_hardware_test = True
 
-    row0.value = False
-    return rc
+# Next up, check key combinations. BootKeys will also handle using the LEDs to
+# indicate what mode you're in.
 
-def check_row4():
-    rc = False
-    row4.value = True
+if bootkeys.check_mass_storage():
+    enable_mass_storage = True
 
-    if col1.value and col2.value:
-        rc = True
+if bootkeys.check_hardware_test():
+    enable_hardware_test = True
 
-    row4.value = False
-    return rc
-
-storage.remount("/", readonly=False)
+# Manage the /hardware_test file depending on whether we're in
+# hardware test mode or not.
 
 try:
-    open("/firstboot", "r")
-    enable_hardware_test = True
-
-    # Leave /firstboot in place here. Hardware test will remove it after
-    # everything's OK.
-except:
-    pass
-
-color = [0, 0, 0]
-
-if check_row0():
-    enable_mass_storage = True
-    color[2] = 64
-
-if check_row4():
-    enable_hardware_test = True
-    color[0] = 64
-
-bootpixel[0] = tuple(color)
+    storage.remount("/", readonly=False)
+except Exception as e:
+    print(f"boot: could not remount / read-write: {e}")
 
 if enable_hardware_test:
-    with open("/hardware_test", "w") as f:
-        f.write("1")
+    try:
+        with open("/hardware_test", "w") as f:
+            f.write("1")
+    except Exception as e:
+        print(f"boot: can't create /hardware_test: {e}")
 else:
     try:
         os.remove("/hardware_test")
@@ -110,23 +75,15 @@ else:
 try:
     storage.remount("/", readonly=True)
 except Exception as e:
-    print(f"could not remount /: {e}")
+    print(f"boot: could not remount / read-only: {e}")
 
 if not enable_mass_storage:
-    # Disable mass storage and USB serial.
+    # Disable mass storage:
     storage.disable_usb_drive()
 
     if not enable_hardware_test:
+        # Disable USB serial.
         usb_cdc.disable()
 
-while check_row0() or check_row4():
-    time.sleep(0.01)
-
-bootpixel[0] = (0, 0, 0)
-bootpixel._sm.deinit()
-
-row0.deinit()
-row4.deinit()
-col1.deinit()
-col2.deinit()
-col3.deinit()
+bootkeys.wait_for_release()
+bootkeys.deinit()
