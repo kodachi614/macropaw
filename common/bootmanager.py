@@ -123,6 +123,10 @@ class TriggerRowCombo(Trigger):
             rc = True
 
         self.row.value = False
+
+        # Let things settle before allowing another check.
+        time.sleep(0.1)
+
         return rc
 
 
