@@ -20,7 +20,7 @@
 
 import supervisor
 
-# CircuitPython's supervisor will use the RGBs to single very low-level
+# CircuitPython's supervisor will use the RGBs to signal very low-level
 # status, but if we leave the brightness at the default of 255, it's
 # pretty blinding. Crank that down.
 supervisor.runtime.rgb_status_brightness = 16
