@@ -1,7 +1,7 @@
-# SPDX-FileCopyrightText: 2022 Kodachi 6 14
+# SPDX-FileCopyrightText: 2025 Kodachi 6 14
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-# Copyright 2022 Kodachi 6 14
+# Copyright 2022-2025 Kodachi 6 14
 #
 # This file is part of the MacroPaw firmware.
 #
@@ -20,111 +20,47 @@
 
 import supervisor
 
-supervisor.runtime.next_stack_limit = 16384
+# CircuitPython's supervisor will use the RGBs to signal very low-level
+# status, but if we leave the brightness at the default of 255, it's
+# pretty blinding. Crank that down.
 supervisor.runtime.rgb_status_brightness = 16
 
-from adafruit_neopixelbackground import NeoPixelBackground
-
-import digitalio
 import board
-import os
-import storage
-import usb_cdc
-import time
 
-row0 = digitalio.DigitalInOut(board.ROW0)
-row0.direction = digitalio.Direction.OUTPUT
+from firstboot import FirstBoot
+from bootmanager import BootManager, TriggerPin
 
-row1 = digitalio.DigitalInOut(board.ROW1)
-row1.direction = digitalio.Direction.OUTPUT
-
-col0 = digitalio.DigitalInOut(board.COL0)
-col0.direction = digitalio.Direction.INPUT
-
-col4 = digitalio.DigitalInOut(board.COL4)
-col4.direction = digitalio.Direction.INPUT
-
-bootpixel = NeoPixelBackground(board.NEOPIXEL, 1, pixel_order="GRB", brightness=0.125)
-bootpixel[0] = (0, 0, 0)
-
+# Start by assuming that nothing special is going on.
 enable_hardware_test = False
 enable_mass_storage = False
 
-def check_row0():
-    rc = False
-    row0.value = True
+firstboot = FirstBoot()
 
-    if col0.value and col4.value:
-        rc = True
+# Use all eight LEDs for boot status.
+bootmgr = BootManager(8,
+    # Mass storage: pull GPIO1 high.
+    TriggerPin(board.GPIO1, True),
 
-    row0.value = False
-    return rc
+    # Hardware test: pull the HWTEST pin low.
+    TriggerPin(board.HWTEST, False),
+)
 
-def check_row1():
-    rc = False
-    row1.value = True
-
-    if col0.value and col4.value:
-        rc = True
-
-    row1.value = False
-    return rc
-
-storage.remount("/", readonly=False)
-
-try:
-    open("/firstboot", "r")
+if firstboot.check():
+    # First boot. Enable hardware test mode.
     enable_hardware_test = True
 
-    # Leave /firstboot in place here. Hardware test will remove it after
-    # everything's OK.
-except:
-    pass
+# Next up, check key combinations. The BootManager will also handle using the
+# LEDs to indicate what mode you're in.
 
-color = [0, 0, 0]
-
-if check_row0():
+if bootmgr.check_mass_storage():
     enable_mass_storage = True
-    color[2] = 64
 
-# Why is this needed??
-time.sleep(.01)
-
-if check_row1():
+if bootmgr.check_hardware_test():
     enable_hardware_test = True
-    color[0] = 64
 
-bootpixel[0] = tuple(color)
+# Actually take action on the special modes.
+bootmgr.set_hardware_test(enable_hardware_test)
+bootmgr.set_mass_storage(enable_mass_storage, enable_hardware_test)
 
-if enable_hardware_test:
-    with open("/hardware_test", "w") as f:
-        f.write("1")
-else:
-    try:
-        os.remove("/hardware_test")
-    except:
-        pass
-
-try:
-    storage.remount("/", readonly=True)
-except Exception as e:
-    print(f"could not remount /: {e}")
-
-if not enable_mass_storage:
-    # Disable mass storage and USB serial.
-    storage.disable_usb_drive()
-
-    if not enable_hardware_test:
-        usb_cdc.disable()
-
-while check_row0() or check_row1():
-    time.sleep(0.01)
-
-bootpixel[0] = (0, 0, 0)
-bootpixel._sm.deinit()
-
-row0.deinit()
-row1.deinit()
-col0.deinit()
-col4.deinit()
-
+bootmgr.wait_for_release()
+bootmgr.deinit()

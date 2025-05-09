@@ -18,55 +18,75 @@
 # You should have received a copy of the GNU General Public License along
 # with the MacroPaw firmware. If not, see <https://www.gnu.org/licenses/>.
 
-import errno
-import os
-import storage
+import microcontroller
 import time
 
-from kmk.keys import KC
+from kmk.keys import make_key
+
+from firstboot import FirstBoot
 
 
 class HardwareTestMatrix:
+    """
+    Test the hardware of the keyswitch matrix. Every time a key is pressed,
+    the LED in its row position gets red, and the LED in its column position
+    gets blue. The test is complete when you've cycled through all the LEDs.
+    """
     def __init__(self, callback, pixels):
         self.callback = callback
         self.pixels = pixels
-        self.colors = [ (64, 0, 0), (0, 64, 0), (0, 0, 64), (0, 0, 0) ]
-        self.last = len(self.colors) - 1
-        self.indices = [ -1 ] * len(pixels)
+        self.checked = [ False ] * 64  # 64 keys for a KnH0F
 
-        self.keys = [ KC.NO.clone() for i in range(len(pixels)) ]
+        self.keys = []
 
-        for i in range(len(pixels)):
-            # This stupid idx=i business is how you do Python lambda
-            # closures. I hate it.
-            self.keys[i].after_press_handler(
-                lambda key, keyboard, *args, idx=i: self._press(idx)
-            )
+        for row in range(8):
+            for col in range(8):
+                # This stupid row=row, col=col business is how you do Python
+                # lambda closures. I hate it.
+                self.keys.append(
+                    make_key(
+                        names=[f"HW_matrix_R{row}_C{col}"],
+                        on_press=lambda key, keyboard, *args, row=row, col=col: self._press(keyboard, row, col)
+                    )
+                )
 
-    def _press(self, i):
-        self.indices[i] = self.indices[i] + 1
+    def _press(self, keyboard, row, col):
+        idx = row * 8 + col
 
-        if self.indices[i] > self.last:
-            self.indices[i] = self.last
+        status = "unpressed" if not self.checked[idx] else "pressed"
 
-        color = self.colors[self.indices[i]]
-        self.pixels[i] = color
+        print(f"Got {status} key R{row} C{col} => SW{idx+1}")
 
-        self.callback(all(map(lambda x: x == self.last, self.indices)))
+        self.checked[idx] = True
 
+        for i in range(8):
+            color = [0, 0, 0]
+            if i == row:
+                color[0] = 64
+
+            if i == col:
+                color[2] = 64
+
+            self.pixels[i] = tuple(color)
+
+        self.callback(all(self.checked))
+
+        return keyboard
 
 class HardwareTestRunner:
-    def __init__(self, keyboard):
+    def __init__(self, keyboard, firstboot):
         self.keyboard = keyboard
+        self.firstboot = firstboot
         self.matrix_status = False
 
     def go(self):
-        for color in [ (64, 0, 0), (0, 64, 0), (0, 0, 64) ]:
+        for color in [ (64, 0, 0), (0, 64, 0), (0, 0, 64), (16, 16, 16) ]:
             self.keyboard.leds_matrix.fill(color)
 
             time.sleep(1)
 
-        self.keyboard.leds_matrix.fill((16, 16, 16))
+        print("Clearing LEDs...")
+        self.keyboard.leds_matrix.fill((0, 0, 0))
 
         self.keyboard.keymap = [
             HardwareTestMatrix(self.matrix, self.keyboard.leds_matrix).keys
@@ -79,31 +99,17 @@ class HardwareTestRunner:
 
     def check_status(self):
         if self.matrix_status:
+            # All done. Kill all the lights...
             self.keyboard.leds_matrix.fill((0, 64, 0))
 
-            failed = False
-
-            try:
-                storage.remount("/", readonly=False)
-            except Exception as e:
-                print(f"Error removing /firstboot: {e}")
-                failed = True
-
-            if not failed:
-                try:
-                    os.remove("/firstboot")
-                except Exception as e:
-                    print(f"Error removing /firstboot: {e}")
-
-                    if e.errno != errno.ENOENT:
-                        failed = True
-
-                storage.remount("/", readonly=True)
-
-            if failed:
+            # ...and clear firstboot.
+            if self.firstboot.clear():
+                print("Rebooting...")
+                microcontroller.reset()
+            else:
                 self.keyboard.leds_matrix.fill((64, 0, 0))
 
 
 def setup_hardware_test(debug, keyboard):
-    runner = HardwareTestRunner(keyboard)
+    runner = HardwareTestRunner(keyboard, FirstBoot())
     runner.go()
