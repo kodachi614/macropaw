@@ -25,7 +25,7 @@
 # If the new board needs a custom build process, DO NOT add it to this list.
 # Instead add it to CUSTOM_BOARDS below, and add a custom target for it.
 
-BOARDS=KnGXT KnGYT
+BOARDS=KnGXT KnGYT Beatboxer
 
 # CUSTOM_BOARDS is the set of all boards that need a custom build
 # process. See above.

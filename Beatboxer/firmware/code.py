@@ -23,9 +23,9 @@ import supervisor
 boot_time = supervisor.ticks_ms()
 
 from kmk.extensions.rgb import AnimationModes
-from kmk.modules.usb_disconnect import USBDisconnect
-from kmk.modules.layers import Layers as _Layers
-from kmk.modules.holdtap import HoldTap
+# from kmk.modules.usb_disconnect import USBDisconnect
+# from kmk.modules.layers import Layers as _Layers
+# from kmk.modules.holdtap import HoldTap
 
 from macropaw import log_time
 
@@ -44,78 +44,31 @@ from keymapper import FSKeymapper as KC
 
 log_time(f"import FSKeymapper (got {KC.__class__.__name__})")
 
-# Layers is here to change the LED matrix color depending on what layer
-# is active. This isn't necessarily the best way to do this, mind you.
-class Layers(_Layers):
-    last_top_layer = 0
-    hues = [128, 64, 0, 96]
-    rgb = None
-
-    def after_hid_send(self, kbd):
-        if self.rgb is not None:
-            if kbd.active_layers[0] != self.last_top_layer:
-                self.last_top_layer = kbd.active_layers[0]
-                self.rgb.hue = self.hues[self.last_top_layer]
-
+def LS(key):
+    return KC.LSFT(key)
 
 def setup_macropaw(debug, kbd):
-    ring_color = (0, 0, 64) if debug.enabled else (0, 64, 0)
-    kbd.setup_animation(ring_color=ring_color,
-                        animation_mode=AnimationModes.BREATHING,
+    kbd.setup_animation(ring_color=(0,0,0),
+                        animation_mode=AnimationModes.KNIGHT,
                         hue_default=128,
-                        animation_speed=2)
+                        val_default=64,
+                        animation_speed=1)
+
     kbd.setup_mapswitchers()
-
-    layers = Layers()
-    layers.rgb = kbd.rgb_matrix
-
-    kbd.modules.append(HoldTap())
-    kbd.modules.append(layers)
-    kbd.modules.append(USBDisconnect())
-
-    # DaVinci Resolve keybindings
-    key_PrevMark = KC.LSFT(KC.UP)
-    key_NextMark = KC.LSFT(KC.DOWN)
-    key_PrevEdit = KC.UP
-    key_NextEdit = KC.DOWN
-    key_PlayReverse = KC.J
-    key_PlayForward = KC.L
-    key_PlayPause = KC.SPACE
-    key_MarkIn = KC.I
-    key_Mark = KC.M
-    key_MarkOut = KC.O
-    key_Razor = KC.LGUI(KC.B)
-    key_RippleDelete = KC.LSFT(KC.LGUI(KC.X))
-    key_Cut = KC.LGUI(KC.X)
-    key_PrevFrame = KC.LEFT
-    key_NextFrame = KC.RIGHT
-    key_Undo = KC.LGUI(KC.Z)
-    key_Redo = KC.LSFT(KC.LGUI(KC.Z))
-    key_Save = KC.LGUI(KC.S)
-
-    key_PrvFrmEd = KC.HT(key_PrevFrame, key_PrevEdit)
-    key_NxtFrmEd = KC.HT(key_NextFrame, key_NextEdit)
-    key_RzrRipple = KC.HT(key_Razor, key_RippleDelete)
-    key_RevUndo = KC.HT(key_PlayReverse, key_Undo)
-    key_FwdRedo = KC.HT(key_PlayForward, key_Redo)
 
     kbd.keymap = [
         # 0: Main layer (default)
         [
-            KC.F1,         KC.F2,        KC.F3,         KC.F4,              KC.F5,
-            KC.F10,        KC.SPACE,     KC.ENTER,      KC.F13,             KC.LT(1, KC.F14),
-        ],
+            KC.A,     KC.B,     KC.C,     KC.D,     KC.E,     KC.F,     KC.G,     KC.H,
+            KC.I,     KC.J,     KC.K,     KC.L,     KC.M,     KC.N,     KC.O,     KC.P,
+            KC.Q,     KC.R,     KC.S,     KC.T,     KC.U,     KC.V,     KC.W,     KC.X,
 
-        # 1: Meta layer
-        [
-            KC.VOLU,       KC.TO(0),     KC.TO(2),      kbd.SwitchToQWERTY, kbd.SwitchToDvorak,
-            KC.VOLD,       KC.MRWD,      KC.MPLY,       KC.MFFD,            KC.NO,
-        ],
+            LS(KC.A), LS(KC.B), LS(KC.C), LS(KC.D), LS(KC.E), LS(KC.F), LS(KC.G), LS(KC.H),
+            LS(KC.I), LS(KC.J), LS(KC.K), LS(KC.L), LS(KC.M), LS(KC.N), LS(KC.O), LS(KC.P),
+            LS(KC.Q), LS(KC.R), LS(KC.S), LS(KC.T), LS(KC.U), LS(KC.V), LS(KC.W), LS(KC.X),
 
-        # 2: DaVinci Resolve layer
-        [
-            key_PrvFrmEd,  key_PrevMark, key_Mark,      key_NextMark,       key_NxtFrmEd,
-            key_RzrRipple, key_RevUndo,  key_PlayPause, key_FwdRedo,        KC.LT(1, key_Save),
+            KC.N0,    KC.N1,    KC.N2,    KC.N3,    KC.N4,    KC.N5,    KC.N6,    KC.N7,
+            KC.MINUS, KC.EQUAL, KC.DOT,   KC.COMMA, KC.SLASH, KC.SCLN,  KC.SPACE, KC.ENTER,
         ],
     ]
 
