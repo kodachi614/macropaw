@@ -114,6 +114,9 @@ mkdir $MOUNTPOINT/lib/kmk
 ( cd $MOUNTPOINT/lib/kmk ; \
   tar xz --no-same-owner --exclude __pycache__ --file ${KMK_TARFILE} )
 
+# Trash any MacOS-specific junk.
+find $MOUNTPOINT \( -name .DS_Store -o -name '._*.py' \) -print0 | xargs -0 rm -f
+
 # If mpy-cross is available, use it.
 if [ -x ${BASE_DIR}/mpy-cross ]; then
     echo "==== Compiling Python files..."
