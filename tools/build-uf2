@@ -99,15 +99,58 @@ fi
 
 touch $MOUNTPOINT/.fseventsd/no_log
 
-# This is the base KMK firmware. We could freeze this into CircuitPython, but
-# for the moment it's honestly more useful to be able to edit it.
-mkdir $MOUNTPOINT/lib
+# At Some Point, we'll probably use mpy-cross to freeze all this stuff, but
+# for now, we just copy it all over.
+#
+# Start by copying common code for all boards. This includes a lib/ directory.
+cp -pr ${BASE_DIR}/common/* $MOUNTPOINT
+
+# Next, copy the board-specific MacroPaw code.
+cp -pr ${BASE_DIR}/${BOARD_ID}/firmware/* $MOUNTPOINT
+
+# After that, copy the base KMK firmware into lib/kmk.
 mkdir $MOUNTPOINT/lib/kmk
 
-( cd $MOUNTPOINT/lib/kmk ; tar xz --no-same-owner --file ${KMK_TARFILE} )
+( cd $MOUNTPOINT/lib/kmk ; \
+  tar xz --no-same-owner --exclude __pycache__ --file ${KMK_TARFILE} )
 
-# This is the MacroPaw-specific firmware.
-cp -pr ${BASE_DIR}/${BOARD_ID}/firmware/* $MOUNTPOINT
+# If mpy-cross is available, use it.
+if [ -x ${BASE_DIR}/mpy-cross ]; then
+    echo "==== Compiling Python files..."
+
+    # Compile all the Python files in the firmware directory.
+    find $MOUNTPOINT \
+         \( -name '*.py' -a \! \( -name 'code.py' -o -name 'boot.py' \) \) \
+         -exec ${BASE_DIR}/mpy-cross {} \;
+
+    # Remove the original Python files.
+    find $MOUNTPOINT \
+         \( -name '*.py' -a \! \( -name 'code.py' -o -name 'boot.py' \) \) \
+         -print0 | xargs -0 rm -f
+else
+    echo "==== No mpy-cross found; not compiling Python files."
+fi
+
+# Dump the board ID into the README.txt file.
+echo "==== Setting up README.txt..."
+sed -e s/BOARD_ID/$BOARD_ID/g <<EOF > $MOUNTPOINT/README.txt
+# MacroPaw BOARD_ID
+#
+# SPDX-FileCopyrightText: 2025 Kodachi 6 14
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Copyright 2022-2025 Kodachi 6 14
+
+This is a MacroPaw BOARD_ID keyboard.
+
+Both the hardware and firmware are open source. The hardware is
+licensed under the CERN Open Hardware License, version 2.0 or higher,
+Strongly Reciprocal. The firmware is licensed under the GPL, version
+3.0 or later.
+
+Source code, hardware design files, and documentation can all be
+found at https://github.com/kodachi614/macropaw.
+EOF
 
 # Finally, arrange for the MacroPaw to enter hardware test on first boot.
 touch $MOUNTPOINT/firstboot

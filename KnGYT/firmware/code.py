@@ -23,7 +23,7 @@ import supervisor
 boot_time = supervisor.ticks_ms()
 
 from kmk.extensions.rgb import AnimationModes
-from kmk.modules.usb_disconnect import USBDisconnect
+# from kmk.modules.usb_disconnect import USBDisconnect
 from kmk.modules.layers import Layers as _Layers
 from kmk.modules.holdtap import HoldTap
 
@@ -71,7 +71,7 @@ def setup_macropaw(debug, kbd):
 
     kbd.modules.append(HoldTap())
     kbd.modules.append(layers)
-    kbd.modules.append(USBDisconnect())
+    # kbd.modules.append(USBDisconnect())
 
     # DaVinci Resolve keybindings
     key_PrevMark = KC.LSFT(KC.UP)

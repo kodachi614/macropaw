@@ -69,7 +69,7 @@ class MacroPawRGB(RGB):
         if ((new_kwargs['animation_mode'] == AnimationModes.USER) and
             not 'user_animation' in new_kwargs):
             new_kwargs['user_animation'] = self.effect_breathmap
-            print(f"MPRGB: init, supplied breathmap")
+            debug(f"MPRGB: init, supplied breathmap")
 
         super().__init__(*args, **new_kwargs)
 
@@ -86,7 +86,7 @@ class MacroPawRGB(RGB):
         super().during_bootup(sandbox)
 
         self.max_key_usage = 0
-        print(f"MPRGB: during_bootup, num_pixels {self.num_pixels}")
+        debug(f"MPRGB: during_bootup, num_pixels {self.num_pixels}")
         self.key_usage = [ 0 ] * self.num_pixels
         self.refresh_count = 0
         self.rescale_count = 0
@@ -138,7 +138,7 @@ class MacroPawRGB(RGB):
             self.coord_mapping = list(range(self.num_pixels))
 
         if len(self.coord_mapping) != self.num_pixels:
-            print(f"MPRGB: coord_mapping {len(self.coord_mapping)} != num_pixels {self.num_pixels}")
+            debug(f"MPRGB: coord_mapping {len(self.coord_mapping)} != num_pixels {self.num_pixels}")
             self.coord_mapping = list(range(self.num_pixels))
 
         # Invert the coordinate mapping for faster lookups.
@@ -148,13 +148,13 @@ class MacroPawRGB(RGB):
             c = self.coord_mapping[i]
 
             if c in self.inv_coord_mapping:
-                print(f"MPRGB: coord_mapping {i} -> {c} already set to {self.inv_coord_mapping[c]}")
+                debug(f"MPRGB: coord_mapping {i} -> {c} already set to {self.inv_coord_mapping[c]}")
 
             self.inv_coord_mapping[c] = i
 
         end_ms = supervisor.ticks_ms()
 
-        print(f"MPRGB: during_bootup, {len(self.breath_table)} entries in {table_ms - start_ms} ms, coord_mapping in {end_ms - table_ms} ms")
+        debug(f"MPRGB: during_bootup, {len(self.breath_table)} entries in {table_ms - start_ms} ms, coord_mapping in {end_ms - table_ms} ms")
 
     def handle_update(self, update):
         with self.update_timer:
@@ -174,8 +174,8 @@ class MacroPawRGB(RGB):
                         # print(f"MPRGB: pressed {key} ({self.key_usage[i]} / {self.max_key_usage})")
             #         else:
             #             print(f"MPRGB: released {key}, index {i}")
-            else:
-                print(f"MPRGB: {key} not in coord_mapping?")
+            # else:
+            #     print(f"MPRGB: {key} not in coord_mapping, not updating usage")
 
     def effect_breathmap(self, parent):
         with self.animation_timer:
@@ -223,11 +223,11 @@ class MacroPawRGB(RGB):
                             self.key_usage[i] = s2
 
                             if self.key_usage[i] < 1:
-                                print("MPRGB: rescaling %d from %d got %d, forcing to 1" % (i, old, self.key_usage[i]))
+                                debug("MPRGB: rescaling %d from %d got %d, forcing to 1" % (i, old, self.key_usage[i]))
                                 self.key_usage[i] = 1
 
                             if self.key_usage[i] > self.max_key_usage:
-                                print("MPRGB: rescaling %d from %d got %d, forcing to %d" % (i, old, self.key_usage[i], self.max_key_usage))
+                                debug("MPRGB: rescaling %d from %d got %d, forcing to %d" % (i, old, self.key_usage[i], self.max_key_usage))
                                 self.key_usage[i] = self.max_key_usage
 
                     self.max_key_usage = new_max // 2

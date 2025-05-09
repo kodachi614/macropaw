@@ -54,8 +54,8 @@ class RingRGB(MacroPawRGB):
         self._elements = []
         self._tail = tail
 
-        if self._debug:
-            debug("RingRGB: pixels: %s, tail: %s" % (self.num_pixels, self._tail))
+        # if debug.enabled:
+        #     debug("RingRGB: pixels: %s, tail: %s" % (self.num_pixels, self._tail))
 
     def during_bootup(self, sandbox):
         self.set_rgb_fill((0, 0, 0))
@@ -78,8 +78,8 @@ class RingRGB(MacroPawRGB):
         else:
             raise Exception("direction must either 1 or -1")
 
-        if self._debug:
-            debug(f"RingRGB: append {el}")
+        # if debug.enabled:
+        #     debug(f"RingRGB: append {el}")
 
         self._elements.append(el)
 
@@ -98,7 +98,6 @@ class RingRGB(MacroPawRGB):
             # Odd number of pixels. Use the middle one.
             p1 = self.num_pixels // 2
             p2 = p1
-
 
         self._elements.append(RingElement(-1, p1,
                                           None,                         (-1 * self._tail) - 1,
@@ -125,13 +124,13 @@ class RingRGB(MacroPawRGB):
         frame = [[0, 0, 0]] * self.num_pixels
         still_active = []
 
-        if self._debug:
-            debug(f"STEP: element count {len(self._elements)}")
+        # if debug.enabled:
+        #     debug(f"STEP: element count {len(self._elements)}")
 
         while self._step >= 1.0:
             for element in self._elements:
-                if self._debug:
-                    debug(f"  {element}:")
+                # if debug.enabled:
+                #     debug(f"  {element}:")
 
                 p = element.position
 
@@ -144,8 +143,8 @@ class RingRGB(MacroPawRGB):
                             prev[2] + (element.color[2] >> i)
                         ]
 
-                        if self._debug:
-                            debug(f"    pixel {p} {prev} => {updated}")
+                        # if debug.enabled:
+                        #     debug(f"    pixel {p} {prev} => {updated}")
 
                         frame[p] = updated
 
@@ -155,14 +154,14 @@ class RingRGB(MacroPawRGB):
 
                 if element:
                     still_active.append(element)
-                else:
-                    if self._debug:
-                        debug(f"  drop {element}")
+                # else:
+                #     if debug.enabled:
+                #         debug(f"  drop {element}")
 
             self._step -= 1.0
 
-        if self._debug:
-            debug(f"frame: {frame}")
+        # if debug.enabled:
+        #     debug(f"frame: {frame}")
 
         for i, updated in enumerate(frame):
             self.set_rgb(updated, i)
