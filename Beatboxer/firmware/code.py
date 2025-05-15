@@ -49,10 +49,10 @@ def LS(key):
 
 def setup_macropaw(debug, kbd):
     kbd.setup_animation(ring_color=(0,0,0),
-                        animation_mode=AnimationModes.KNIGHT,
+                        animation_mode=AnimationModes.BREATHING,
                         hue_default=128,
                         val_default=64,
-                        animation_speed=1)
+                        animation_speed=2)
 
     kbd.setup_mapswitchers()
 
