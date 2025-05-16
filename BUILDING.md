@@ -73,9 +73,8 @@ yourself if you're trying to make changes in them.
 
 - GNU `make`
 
-   Everything will probably work with the system `make` on MacOS, but why
-   bother? Just install GNU make with `brew install make` and use that (it'll
-   install as `gmake`).
+   Install GNU `make` on MacOS with `brew install make` and use that (it'll
+   install as `gmake`). The Makefile here won't work with the system `make`.
 
 - `mpy-cross`
 

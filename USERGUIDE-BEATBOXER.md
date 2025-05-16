@@ -79,7 +79,7 @@ reset.
 ## Mass Storage Mode
 
 To enter mass storage mode - where the MacroPaw will appear as a USB mass
-storage device called `MACROPAW`, and you can edit the firmware files live -
+storage device called `BEATBOX`, and you can edit the firmware files live -
 hold down the `HWTEST` button while plugging in the MacroPaw or pressing the
 `RESET` button. The board will show a countdown on the LEDs; let go before the
 countdown ends, and the board will reboot into mass storage mode.

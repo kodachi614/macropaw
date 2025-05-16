@@ -25,11 +25,11 @@
 # If the new board needs a custom build process, DO NOT add it to this list.
 # Instead add it to CUSTOM_BOARDS below, and add a custom target for it.
 
-BOARDS=KnGXT KnGYT Beatboxer
+BOARDS=KnGXT KnGYT
 
 # CUSTOM_BOARDS is the set of all boards that need a custom build
 # process. See above.
-CUSTOM_BOARDS=
+CUSTOM_BOARDS=Beatboxer
 
 all: $(BOARDS) $(CUSTOM_BOARDS)
 
@@ -60,7 +60,7 @@ macropaw-$1.uf2: tools/base-firmware-$1.uf2 \
 				 $(wildcard common/*.py) \
 				 $(wildcard common/lib/*)
 	@echo "\n== Building $$@..."
-	bash tools/build-uf2 $1 $$$$(pwd) $(VOLNAME)
+	bash tools/build-uf2 $1 $$$$(pwd) $(if $2,$2,$(VOLNAME))
 
 $1: macropaw-$1.uf2
 
@@ -74,6 +74,12 @@ endef
 
 $(foreach board,$(BOARDS),$(eval $(call board_rule,$(board))))
 
+# The Beatboxer gets a special rule so that we can pass a special
+# volume name. This is a good opportunity for improvement later.
+$(eval $(call board_rule,Beatboxer,BEATBOX))
+
+KnH0F: macropaw-Beatboxer.uf2
+
 # We need tools/base-firmware.uf2 and tools/kmk-tarfile.tgz for
 # dependent things. If these are missing, fetch them from the 'Net.
 
@@ -82,9 +88,11 @@ tools/kmk-tarfile.tgz:
 
 clean: FORCE
 	rm -f $(addsuffix .uf2, $(addprefix macropaw-, $(BOARDS)))
+	rm -f $(addsuffix .uf2, $(addprefix macropaw-, $(CUSTOM_BOARDS)))
 
 clobber: clean FORCE
 	rm -f $(addsuffix .uf2, $(addprefix tools/base-firmware-, $(BOARDS)))
+	rm -f $(addsuffix .uf2, $(addprefix tools/base-firmware-, $(CUSTOM_BOARDS)))
 	rm -f tools/kmk-tarfile.tgz
 
 # Sometimes we have a file-target that we want Make to always try to
