@@ -99,9 +99,6 @@ fi
 
 touch $MOUNTPOINT/.fseventsd/no_log
 
-# At Some Point, we'll probably use mpy-cross to freeze all this stuff, but
-# for now, we just copy it all over.
-#
 # Start by copying common code for all boards. This includes a lib/ directory.
 cp -pr ${BASE_DIR}/common/* $MOUNTPOINT
 
@@ -118,13 +115,13 @@ mkdir $MOUNTPOINT/lib/kmk
 find $MOUNTPOINT \( -name .DS_Store -o -name '._*.py' \) -print0 | xargs -0 rm -f
 
 # If mpy-cross is available, use it.
-if [ -x ${BASE_DIR}/mpy-cross ]; then
-    echo "==== Compiling Python files..."
+if command -v mpy-cross >/dev/null 2>&1; then
+    echo "==== Found mpy-cross; compiling Python files..."
 
     # Compile all the Python files in the firmware directory.
     find $MOUNTPOINT \
          \( -name '*.py' -a \! \( -name 'code.py' -o -name 'boot.py' \) \) \
-         -exec ${BASE_DIR}/mpy-cross {} \;
+         -exec mpy-cross {} \;
 
     # Remove the original Python files.
     find $MOUNTPOINT \
