@@ -41,7 +41,7 @@ The output of this process is a single .UF2 file that you can flash to your
 MacroPaw board. The Makefile here knows how to do all of this, but the real
 magic mostly happens in `tools/build-uf2` and `tools/flash`.
 
-**This is version 0.5.0 of the MacroPaw firmware.** It is based on
+**This is version 0.5.1 of the MacroPaw firmware.** It is based on
 
 - CircuitPython 9.2.7 built from commit `a87b74cd54` on the
   `flynn/kodachi-ports-9.2.7` branch of
