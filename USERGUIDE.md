@@ -2,10 +2,19 @@
 
 The MacroPaw keypads are a line of small yet fully-customizable mechanical
 keyboards. (The name was originally from my son, years ago when he was young,
-and the "paw" motif has kinda stuck.) Every MacroPaw has MX-style switches
-with RGB LEDs under the keys, USB-C connectivity, and absurd customizability.
+and the "paw" motif has kinda stuck.) The core of the MacroPaws is a Raspberry
+Pi RP2040 with 16MiB of flash memory, a USB-C connector, and an attached key
+matrix and RGB LEDs (which may or may not be under the keys). Some MacroPaws
+have more capability than others; all are crazy customizable by writing Python
+code. (Yes. Python. On a keyboard. It's insane and wonderful to live in the
+future.)
 
-There are two current models of MacroPaw:
+This guide covers the MacroPaw KnGXT and KnGYT boards. There is a [separate
+guide] for the MacroPaw Beatboxer KnH0F board.
+
+[separate guide]: USERGUIDE-BEATBOXER.md
+
+## Overview
 
 | Name  | Keys | Layout | Rotary Encoders |
 | :---- | :--: | :----: | :-------------- |
